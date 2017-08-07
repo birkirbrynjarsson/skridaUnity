@@ -11,16 +11,16 @@ public class ClueControllerScript : MonoBehaviour {
 	private List<GameObject> receivedClues = new List<GameObject>();
 	public RectTransform cluesContainer;
 
-	public List<Clue> clues = new List<Clue>(){
-		new Clue(){
+	public List<Message> messages = new List<Message>(){
+		new Message(){
 			title = "First Clue",
 			content = "contentcontent",
 		},
-		new Clue(){
+		new Message(){
 			title = "Second Clue",
 			content = "contentcontent",
 		},
-		new Clue(){
+		new Message(){
 			title = "Third Clue",
 			content = "content333",
 		}
@@ -37,9 +37,9 @@ public class ClueControllerScript : MonoBehaviour {
 	}
 
 	void spawnClue(){
-		int clueNr = rand.Next (clues.Count);
-		string title = clues[clueNr].title;
-		string content = clues[clueNr].content;
+		int clueNr = rand.Next (messages.Count);
+		string title = messages[clueNr].title;
+		string content = messages[clueNr].content;
 		//clues.RemoveAt (clueNr);
 
 		GameObject clueObject = (GameObject)Resources.Load("Clue");
@@ -55,7 +55,7 @@ public class ClueControllerScript : MonoBehaviour {
 	}
 }
 
-public class Clue {
+public class Message {
 	public string title;
 	public string content;
 }

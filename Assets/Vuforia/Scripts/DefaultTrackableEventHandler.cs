@@ -4,6 +4,7 @@ All Rights Reserved.
 Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
 
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Vuforia
@@ -52,10 +53,12 @@ namespace Vuforia
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
                 OnTrackingFound();
+				startClueFound ();
             }
             else
             {
                 OnTrackingLost();
+				stopClueFound ();
             }
         }
 
@@ -108,5 +111,39 @@ namespace Vuforia
         }
 
         #endregion // PRIVATE_METHODS
+
+		private GameObject spawnedScroll;
+		private List<GameObject> spawnedEffects;
+
+		void startClueFound(){
+			createCircularLight ();
+			GameObject scrollObject = (GameObject)Resources.Load("scroll");
+			spawnedScroll = Instantiate (scrollObject);
+			spawnedScroll.transform.SetParent(transform, false);
+			spawnedScroll.GetComponent<ScrollScript> ().resetPosition ();
+			spawnedScroll.GetComponent<ScrollScript> ().goUp ();
+		}
+
+		void stopClueFound(){
+			if (spawnedScroll != null) {
+				Destroy (spawnedScroll);
+			}
+			if (spawnedEffects != null) {
+				for (int i = 0; i < spawnedEffects.Count; i++) {
+					Destroy (spawnedEffects [i]);
+				}
+			}
+		}
+
+		void createCircularLight(){
+			if (spawnedEffects == null) {
+				spawnedEffects = new List<GameObject> ();
+			}
+			string jmoEffects = "CFX Prefabs (Mobile)/";
+			GameObject effectObject = (GameObject)Resources.Load(jmoEffects + "Misc/CFXM_CircularLightWall");
+			GameObject effect = Instantiate (effectObject);
+			effect.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+			spawnedEffects.Add (effect);
+		}
     }
 }

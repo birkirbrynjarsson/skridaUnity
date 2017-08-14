@@ -6,22 +6,32 @@ using UnityEngine.UI;
 public class openClueScript : MonoBehaviour {
 
 	public Text title;
-	public Text content;
 	public Text date;
+	public Text location;
+	public Text content;
+	public Image image;
+	public Sprite sprite;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	private float noImageTop;
+	private float yesImageTop;
+
+	void Start(){
+		noImageTop = -145f;
+		yesImageTop = -330f;
 	}
 
-	public void updateClue(string title, string date, string content){
+	public void updateClue(string title, string date, string location, string content, Sprite sprite){
 		this.title.text = title;
 		this.date.text = date;
+		this.location.text = location;
 		this.content.text = content;
+		if (sprite != null) {
+			this.image.gameObject.SetActive (true);
+			this.image.overrideSprite = sprite;
+			this.content.rectTransform.offsetMax = new Vector2 (this.content.rectTransform.offsetMax.x, yesImageTop);
+		} else {
+			this.image.gameObject.SetActive (false);
+			this.content.rectTransform.offsetMax = new Vector2 (this.content.rectTransform.offsetMax.x, noImageTop);
+		}
 	}
 }

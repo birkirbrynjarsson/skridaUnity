@@ -34,7 +34,7 @@ public class ClueControllerScript : MonoBehaviour {
 		new Message(){
 			title = "Framvinda leiksins",
 			location = "Leiðbeiningar",
-			content = "Upp í hægra horninu er hægt að fylgjast með framvinduna þína í leiknum.\n\nEf smellt er á myndina af leikmanninum opnast gluggi með ítarlegri upplýsingum, þar er svo hægt að velja sér nafn og fleira.",
+			content = "Upp í vinstra horninu er hægt að fylgjast með framvinduna þína í leiknum.\n\nEf smellt er á myndina af leikmanninum opnast gluggi með ítarlegri upplýsingum, þar er svo hægt að velja sér nafn og velja útlit á leikmannin.",
 			spritePath = "messages/playerProgress"
 		},
 		new Message(){

@@ -16,6 +16,7 @@ public class PlayerControllerScript : MonoBehaviour {
 	public string playerName;
 	public Text playerNameText;
 	public InputField playerNameInput;
+	public Text playerTitle;
 	public Text playerMenuLvlText;
 	public Text playerMenuXpText;
 	public Text playerMenuTotalXpText;
@@ -159,6 +160,7 @@ public class PlayerControllerScript : MonoBehaviour {
 		playerMenuLvlText.text = level.ToString ();
 		lvlFlash.SetActive (false);
 		lvlFlash.SetActive (true);
+		updateTitle ();
 	}
 
 	void resetStarScale(){
@@ -177,11 +179,49 @@ public class PlayerControllerScript : MonoBehaviour {
 		sex = "male";
 		maleImage.sprite = maleBtnActive;
 		femaleImage.sprite = femaleBtnInactive;
+		updateTitle ();
 	}
 
 	void femaleClicked(){
 		sex = "female";
 		femaleImage.sprite = femaleBtnActive;
 		maleImage.sprite = maleBtnInactive;
+		updateTitle ();
+	}
+
+	void updateTitle(){
+		if (sex == "female") {
+			if (level >= 24) {
+				playerTitle.text = "Skálholtsbiskup";
+			} else if (level >= 20) {
+				playerTitle.text = "Abbadís";
+			} else if (level >= 16) {
+				playerTitle.text = "Príorinna";
+			} else if (level >= 12) {
+				playerTitle.text = "Prestvígð Nunna";
+			} else if (level >= 8) {
+				playerTitle.text = "Nunna / Reglusystir";
+			} else if (level >= 4) {
+				playerTitle.text = "Nemandi";
+			} else {
+				playerTitle.text = "Vinnukona";
+			}
+		} else {
+			if (level >= 24) {
+				playerTitle.text = "Skálholtsbiskup";
+			} else if (level >= 20) {
+				playerTitle.text = "Ábóti";
+			} else if (level >= 16) {
+				playerTitle.text = "Príor";
+			} else if (level >= 12) {
+				playerTitle.text = "Prestvígður Munkur";
+			} else if (level >= 8) {
+				playerTitle.text = "Munkur / Reglubróðir";
+			} else if (level >= 4) {
+				playerTitle.text = "Nemandi";
+			} else {
+				playerTitle.text = "Vinnumaður";
+			}
+		}
 	}
 }

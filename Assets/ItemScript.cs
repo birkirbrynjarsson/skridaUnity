@@ -8,7 +8,10 @@ public class ItemScript : MonoBehaviour {
 
 	public string itemName;
 	public string about;
+	public string location;
+	public string date;
 
+	public Button openItemButton;
 	public Image backgroundImage;
 	public Sprite backgroundOpen;
 	public Image lockImage;
@@ -23,6 +26,10 @@ public class ItemScript : MonoBehaviour {
 	public Image star1;
 	public Image star2;
 	public Image star3;
+
+	public PlayMakerFSM fsm;
+
+	public OpenItemScript openItemScript;
 
 	private bool isFound;
 	public int currentLevel;
@@ -40,6 +47,9 @@ public class ItemScript : MonoBehaviour {
 		star1.enabled = false;
 		star2.enabled = false;
 		star3.enabled = false;
+
+		openItemButton.onClick.AddListener (openItem);
+		openItemScript = GameObject.Find("OpenItem").GetComponent<OpenItemScript>();
 	}
 	
 	// Update is called once per frame
@@ -57,6 +67,10 @@ public class ItemScript : MonoBehaviour {
 		starSlot3.enabled = true;
 		itemImage.enabled = true;
 		itemImage.sprite = item0;
+
+		System.DateTime receivedTime = System.DateTime.Now;
+		string minute = receivedTime.Minute < 10 ? "0" + receivedTime.Minute.ToString () : receivedTime.Minute.ToString ();
+		date = receivedTime.Hour.ToString () + ":" + minute + ", " + receivedTime.Day.ToString() + "/" + receivedTime.Month.ToString();
 	}
 
 	public void levelUp(){
@@ -94,5 +108,12 @@ public class ItemScript : MonoBehaviour {
 	private void level3(){
 		star3.enabled = true;
 		itemImage.sprite = item3;
+	}
+
+	public void openItem(){
+		if (isFound) {
+			openItemScript.updateClue (itemName, date, location, about, itemImage.sprite, currentLevel);
+			fsm.SetState ("OpenItem");
+		}
 	}
 }

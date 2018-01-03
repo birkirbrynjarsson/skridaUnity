@@ -7,6 +7,7 @@ using DoozyUI;
 public class ItemScript : MonoBehaviour {
 
 	public string itemName;
+    [TextArea]
 	public string about;
 	public string location;
 	public string date;

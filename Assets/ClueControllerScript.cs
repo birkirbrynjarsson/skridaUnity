@@ -18,6 +18,7 @@ public class ClueControllerScript : MonoBehaviour {
 	public Text totalCluesText;
 	public GameObject notificationPin;
 	public Text notificationText;
+	public float cluePadding;
 
 	public List<Message> messages = new List<Message>(){
 		// 0
@@ -121,7 +122,7 @@ public class ClueControllerScript : MonoBehaviour {
 		float yPos = 0;
 		for (var i = receivedClues.Count - 1; i >= 0; i--) {
 			receivedClues[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, yPos, 0f);
-			yPos += -130f;
+			yPos += -cluePadding;
 		}
 		cluesContainer.sizeDelta = new Vector2 (0f, -yPos);
 	}

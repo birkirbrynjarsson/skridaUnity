@@ -277,6 +277,18 @@ public class ChallengeScript : MonoBehaviour {
             answers = new string[] {"295",
                                     "tvöhundruðníutíuogfimm"}
         },
+        new Challenge(){
+            question = "?",
+            answers = new string[] {}
+        },
+        new Challenge(){
+            question = "?",
+            answers = new string[] {}
+        },
+        new Challenge(){
+            question = "?",
+            answers = new string[] {}
+        },
     };
 
     public Text question;
@@ -296,9 +308,9 @@ public class ChallengeScript : MonoBehaviour {
 		
 	}
 
-    public void setChallenge(int index){
-        currentChallengeIndex = index;
-        question.text = challenges[index].question;
+    public void setChallenge(int challengeIndex, int itemIndex){
+        currentChallengeIndex = (itemIndex * 3) + challengeIndex;
+        question.text = challenges[currentChallengeIndex].question;
     }
 
     void tryAnswer() {

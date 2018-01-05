@@ -11,6 +11,7 @@ public class OpenItemScript : MonoBehaviour {
 	public Text description;
 	public Image image;
     public int level;
+    public int itemIndex;
 
 	public RectTransform scrollWrapper;
 	public Sprite play;
@@ -34,13 +35,14 @@ public class OpenItemScript : MonoBehaviour {
         playChallenge3.onClick.AddListener(openChallenge3);
     }
 
-	public void updateClue(string title, string date, string location, string description, Sprite sprite, int level){
+	public void updateClue(string title, string date, string location, string description, Sprite sprite, int level, int itemIndex){
 		this.title.text = title;
 		this.date.text = date;
 		this.location.text = location;
 		this.description.text = description;
 		this.image.overrideSprite = sprite;
         this.level = level;
+        this.itemIndex = itemIndex;
 
 		scrollWrapper.localPosition = new Vector3 (0f, 0f, 0f);
 
@@ -64,14 +66,14 @@ public class OpenItemScript : MonoBehaviour {
 	}
 
     public void openChallenge1(){
-        challenge.setChallenge(1);
+        challenge.setChallenge(0, itemIndex);
         fsm.SetState("Challenge");
     }
 
     public void openChallenge2()
     {
         if(level >= 1){
-            challenge.setChallenge(2);
+            challenge.setChallenge(1, itemIndex);
             fsm.SetState("Challenge");   
         }
     }
@@ -79,7 +81,7 @@ public class OpenItemScript : MonoBehaviour {
     public void openChallenge3()
     {
         if (level >= 2){
-            challenge.setChallenge(3);
+            challenge.setChallenge(2, itemIndex);
             fsm.SetState("Challenge");
         }
     }

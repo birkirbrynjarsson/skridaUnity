@@ -11,6 +11,7 @@ public class ItemScript : MonoBehaviour {
 	public string about;
 	public string location;
 	public string date;
+    public int itemIndex;
 
 	public Button openItemButton;
 	public Image backgroundImage;
@@ -113,7 +114,7 @@ public class ItemScript : MonoBehaviour {
 
 	public void openItem(){
 		if (isFound) {
-			openItemScript.updateClue (itemName, date, location, about, itemImage.sprite, currentLevel);
+            openItemScript.updateClue (itemName, date, location, about, itemImage.sprite, currentLevel, itemIndex);
 			fsm.SetState ("OpenItem");
 		}
 	}

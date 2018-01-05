@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using DoozyUI;
@@ -286,7 +287,7 @@ public class ChallengeScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
@@ -294,24 +295,103 @@ public class ChallengeScript : MonoBehaviour {
 		
 	}
 
-    void tryAnswer(){
-        string input = answerInput.text;
-        foreach(string answer in answers){
+    void tryAnswer(Challenge challenge) {
+        // First iteration.
+        // Only change answer to lowercase.
+        string input = answerInput.text.ToLower();
+
+        foreach(string answer in challenge.answers){
             if(input == answer){
                 correctAnswer();
                 return;
             }
         }
+
+        // Second iteration.
+        // Remove non letters and change to english letters
+        input = removeNonLetters(input);
+        input = parseIcelandicLetters(input);
+
+        for (int i = 0; i < challenge.answers.Length; i++) {
+            challenge.answers[i] = removeNonLetters(challenge.answers[i]);
+            challenge.answers[i] = parseIcelandicLetters(challenge.answers[i]);
+
+            if(input == challenge.answers[i]){
+                correctAnswer();
+                return;
+            }
+        }
+
+        // Did not find the correct answer
         wrongAnswer();
         return;
     }
 
     void correctAnswer(){
-        UIManager.ShowNotification("ItemNotification", 10f, true, "Fjársjóðsfundur!", itemName, item0);
+        UIManager.ShowNotification("ItemNotification", 10f, true, "Fjársjóðsfundur!");
     }
 
     void wrongAnswer(){
         
+    }
+
+    /// <summary>
+    /// Removes all spaces, dots and slashes from a string and returns
+    /// the resulting string.
+    /// </summary>
+    string removeNonLetters(string str) {
+        str = str.Replace(" ", string.Empty);
+        str = str.Replace(".", string.Empty);
+        str = str.Replace(",", string.Empty);
+        str = str.Replace("´", string.Empty);
+        str = str.Replace("`", string.Empty);
+        str = str.Replace("'", string.Empty);
+        str = str.Replace("\\", string.Empty);
+        return str.Replace("/", string.Empty);
+    }
+
+    /// <summary>
+    /// Changes icelandic letters to english letters.
+    /// </summary>
+    string parseIcelandicLetters(string str) {
+        StringBuilder strBuilder = new StringBuilder(str);
+
+        for (int i = 0; i < strBuilder.Length; i++) {
+            if (strBuilder[i] == 'á') {
+                strBuilder[i] = 'a';
+            }
+            else if (strBuilder[i] == 'é') {
+                strBuilder[i] = 'e';
+            }
+            else if (strBuilder[i] == 'í') {
+                strBuilder[i] = 'i';
+            }
+            else if (strBuilder[i] == 'ó') {
+                strBuilder[i] = 'o';
+            }
+            else if (strBuilder[i] == 'ú') {
+                strBuilder[i] = 'u';
+            }
+            else if (strBuilder[i] == 'ý') {
+                strBuilder[i] = 'y';
+            }
+            else if (strBuilder[i] == 'þ') {
+                strBuilder[i] = 't';
+                strBuilder.Insert(i+1, 'h');
+            }
+            else if (strBuilder[i] == 'æ') {
+                strBuilder[i] = 'a';
+                strBuilder.Insert(i+1, 'e');
+            }
+            else if (strBuilder[i] == 'ö') {
+                strBuilder[i] = 'o';
+            }
+            else if (strBuilder[i] == 'ð') {
+                strBuilder[i] = 'd';
+            }
+        }
+
+        return strBuilder.ToString();
     }
 }
 

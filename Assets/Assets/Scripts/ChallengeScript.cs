@@ -273,17 +273,17 @@ public class ChallengeScript : MonoBehaviour {
                                     "skriða"}
         },
 		new Challenge(){
-            question = "Hvað voru margir einstiklingar grafnir upp í klausturkirkjugarðinum?",
+            question = "Hvað voru margir einstaklingar grafnir upp í klausturkirkjugarðinum?",
             answers = new string[] {"295",
                                     "tvöhundruðníutíuogfimm"}
         },
     };
 
-    public Text title;
     public Text question;
     public Image image;
     public InputField answerInput;
     public string[] answers;
+    private int currentChallengeIndex;
 
 	// Use this for initialization
 	void Start () {
@@ -295,7 +295,13 @@ public class ChallengeScript : MonoBehaviour {
 		
 	}
 
-    void tryAnswer(Challenge challenge) {
+    public void setChallenge(int index){
+        currentChallengeIndex = index;
+        question.text = challenges[index].question;
+    }
+
+    void tryAnswer() {
+        Challenge challenge = challenges[currentChallengeIndex];
         // First iteration.
         // Only change answer to lowercase.
         string input = answerInput.text.ToLower();

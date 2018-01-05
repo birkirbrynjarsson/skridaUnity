@@ -56,7 +56,11 @@ public class ChallengeScript : MonoBehaviour {
 		new Challenge(){
             question = "Hversu oft á sólahring fór bænahald reglubræðra fram?",
             answers = new string[] {"8",
-                                    "átta"}
+                                    "átta",
+                                    "8 sinnum",
+                                    "átta sinnum",
+                                    "8 sinnum á sólahring",
+                                    "átta sinnum á sólahring"}
         },
 		new Challenge(){
             question = "Hvað voru bænaguðsþjónustur sem hluti af trúariðkun reglubræðra kallaðar?",

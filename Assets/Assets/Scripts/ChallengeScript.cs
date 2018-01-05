@@ -14,26 +14,35 @@ public class ChallengeScript : MonoBehaviour {
 		new Challenge(){
             question = "Hvað er grunnflötur klausturbygginganna stór?",
             answers = new string[] {"yfir 1500 fermetrar",
-									"yfir 1500m2", 
 									"yfir 1500 m2",
+									"yfir 1500 m^2",
 									"yfir 1500",
 									"meira en 1500 fermetrar",
-									"meira en 1500m2", 
 									"meira en 1500 m2",
+									"meira en 1500 m^2",
 									"meira en 1500",
+                                    "stærra en 1500 fermetrar",
+									"stærra en 1500 m2",
+									"stærra en 1500 m^2",
+									"stærra en 1500",
+                                    "1500 fermetrar",
 									"1500", 
+                                    "1500 m2",
+                                    "1500 m^2",
+                                    "1500+ fermetrar",
 									"1500+", 
-									"1500+m2", 
-									"1500 m2"}
+                                    "1500+ m2",
+                                    "1500+ m^2",
+                                    "> 1500 fermetrar",
+									"> 1500", 
+                                    "> 1500 m2",
+                                    "> 1500 m^2"}
         },
 		new Challenge(){
-            question = "Hver leigði klaustrið og allar eignir þess frá danska kónginum sem markaði formleg lok á klausturhaldi að Skrið?",
+            question = "Hver leigði klaustrið og allar eignir þess frá danska kónginum sem markaði formleg lok á klausturhaldi að Skriðu?",
             answers = new string[] {"sr. einar árnason",
-									"sr. einar arnason",
-									"séra eina árnason",
-									"séra eina arnason",
-									"einar árnason",
-									"einar arnason"}
+									"séra einar árnason",
+									"einar árnason"}
         },
 		new Challenge(){
             question = "Hvaða ár var lútherstrú lögleidd í Danmörku?",
@@ -45,7 +54,8 @@ public class ChallengeScript : MonoBehaviour {
         },
 		new Challenge(){
             question = "Hversu oft á sólahring fór bænahald reglubræðra fram?",
-            answers = new string[] {"8"}
+            answers = new string[] {"8",
+                                    "átta"}
         },
 		new Challenge(){
             question = "Hvað voru bænaguðsþjónustur sem hluti af trúariðkun reglubræðra kallaðar?",
@@ -59,12 +69,48 @@ public class ChallengeScript : MonoBehaviour {
 									"klukkan 15:00",
 									"kl 15",
 									"kl 15:00",
+
 									"3",
+                                    "3:00",
 									"klukkan 3",
+                                    "klukkan 3:00",
 									"kl 3",
+                                    "kl 3:00",
 									"3 eftir hádegi",
+                                    "3:00 eftir hádegi",
 									"klukkan 3 eftir hádegi",
-									"kl 3 eftir hádegi",}
+                                    "klukkan 3:00 eftir hádegi",
+									"kl 3 eftir hádegi",
+                                    "kl 3:00 eftir hádegi",
+                                    
+                                    "3 e.h.",
+                                    "3:00 e.h.",
+									"klukkan 3 e.h.",
+                                    "klukkan 3:00 e.h.",
+									"kl 3 e.h.",
+                                    "kl 3:00 e.h.",
+
+                                    "þrjú",
+									"klukkan þrjú",
+									"kl þrjú",
+									"þrjú eftir hádegi",
+									"klukkan þrjú eftir hádegi",
+									"kl þrjú eftir hádegi",
+
+									"þrjú e.h.",
+									"klukkan þrjú e.h.",
+									"kl þrjú e.h.",
+
+                                    "fimmtán",
+									"klukkan fimmtán",
+									"kl fimmtán",
+									"fimmtán eftir hádegi",
+									"klukkan fimmtán eftir hádegi",
+									"kl fimmtán eftir hádegi",
+                                    
+                                    "fimmtán e.h.",
+									"klukkan fimmtán e.h.",
+									"kl fimmtán e.h."}
         },
 		new Challenge(){
             question = "Á hvaða mánaðardegi er allra heilagra messa?",
@@ -73,27 +119,42 @@ public class ChallengeScript : MonoBehaviour {
 									"1 nóvember",
 									"1 nóv",
 									"fyrsti nóvember",
-									"fyrsti nóv"}
+									"fyrsti nóv",
+                                    "01/11",
+                                    "1/11",
+                                    "11/1",
+                                    "11/01",
+                                    "01.11",
+                                    "1.11",
+                                    "11.01",
+                                    "11.1"}
         },
 		new Challenge(){
             question = "Hverskonar stofnun var rekin í klaustrinu á Skriðu?",
             answers = new string[] {"sjúkrahús",
 									"hæli sjúkra",
 									"hæli",
-									"læknamiðstöð"}
+									"læknamiðstöð",
+                                    "lækningar",
+                                    "læknir",
+                                    "sjúkra",
+                                    "hjúkrunarheimili",
+                                    "hjúkrun",
+                                    "læknun",
+                                    "hospítal"}
         },
 		new Challenge(){
             question = "Hvaða príor á Skriðuklaustri gegndi því hlutverki styðst?",
             answers = new string[] {"jón markússon",
-									"jon markusson",
-									"jon markússon",
-									"jón markusson"}
+                                    "jón"}
         },
 		new Challenge(){
             question = "Hver gaf kirkjunni jörðina að Skriðu?",
             answers = new string[] {"sesselja þorsteinsdóttir",
 									"sesselja þorsteins",
-									"sesselja þorsteinsd"}
+									"sesselja þorsteinsd",
+                                    "sesselja þorsteinsd.",
+                                    "sesselja"}
         },
 		new Challenge(){
             question = "Hvaða ár er talið að klaustrið á Skriðu hafi verið stofnað?",
@@ -102,15 +163,46 @@ public class ChallengeScript : MonoBehaviour {
 		new Challenge(){
             question = "Hvaða synd hafði Sesselja drýgt?",
             answers = new string[] {"kvæntist frænda sínum",
-									"giftist frænda sínum"}
+									"giftist frænda sínum",
+                                    "kvæntist skyldmenni",
+                                    "giftist skyldmenni",
+                                    "kvæntist frænda",
+                                    "giftist frænda",
+                                    "gekk í hjónaband með frænda",
+                                    "gekk í hjónaband með frænda sínum",
+                                    "gekk í hjónaband með skyldmenni",
+                                    "gekk í hjónaband",
+                                    "giftist",
+                                    "kvæntist",
+                                    "skyldleiki",
+                                    "skyldleiki hjóna",
+                                    "giftist einari ormssyni loftssyni hins ríka",
+                                    "giftist einari",
+                                    "giftist einari ormssyni",
+                                    "giftist einari ormssyni loftssyni",
+                                    "giftist einari frænda",
+                                    "kvæntist einari ormssyni loftssyni hins ríka",
+                                    "kvæntist einari",
+                                    "kvæntist einari ormssyni",
+                                    "kvæntist einari ormssyni loftssyni",
+                                    "kvæntist einari frænda",
+                                    "giftist fjórmenningi",
+                                    "kvæntist fjórmenningi",
+                                    "ósiðlegt hjónaband"}
         },
 		new Challenge(){
             question = "Af hverju gaf Sesselja jörðina Skriðu til stofnunar klausturs?",
             answers = new string[] {"til friðþægingar gagnvart guði",
 									"friðþægingar gagnvart guði",
+                                    "friðþægingar",
 									"friðþæging gagnvart guði",
 									"friðþæging",
-									"til friðþægingar"}
+									"til friðþægingar",
+                                    "friðþægingu gagnvart guði",
+                                    "friðþægingu",
+                                    "syndaaflausn",
+                                    "syndaaflausnar",
+                                    "til syndaaflausnar"}
         },
 		new Challenge(){
             question = "Hvenær er gjafabréf þeirra Hallsteins og Sesselju dagsett?",
@@ -121,20 +213,47 @@ public class ChallengeScript : MonoBehaviour {
 									"8. júní árið 1500",
 									"8 júní árið 1500",
 									"áttunda júní 1500",
-									"áttunda júní árið 1500"}
+									"áttunda júní árið 1500",
+                                    "08/06/1500",
+                                    "8/6/1500",
+                                    "08/6/1500",
+                                    "8/06/1500",
+                                    "06/08/1500",
+                                    "6/08/1500",
+                                    "06/8/1500",
+                                    "6/8/1500",
+                                    "árið 1500",
+                                    "1500",
+                                    "8 júní",
+                                    "08/06",
+                                    "8/6",
+                                    "08/6",
+                                    "8/06",
+                                    "06/08",
+                                    "6/08",
+                                    "06/8",
+                                    "6/8"}
         },
 		new Challenge(){
             question = "Hver var Skálholtsbiskup þegar Skriðuklaustur var stofnað?",
-            answers = new string[] {"stefán jónsson"}
+            answers = new string[] {"stefán jónsson",
+                                    "stefán"}
         },
 		new Challenge(){
             question = "Hvað hét fyrsti príor Skriðuklausturs?",
-            answers = new string[] {"narfi jónsson"}
+            answers = new string[] {"narfi jónsson",
+                                    "narfi"}
         },
 		new Challenge(){
             question = "Eftir hvaða klausturreglu starfaði Skriðuklaustur?",
             answers = new string[] {"ágústínusarreglu",
-									"ágústínusarregla"}
+									"ágústínusarregla",
+                                    "reglu ágústínusar",
+                                    "augustinus",
+                                    "augustinusarreglu",
+                                    "augustinusarregla",
+                                    "regla augustinusar",
+                                    "regla augustinus"}
         },
 		new Challenge(){
             question = "Hvað kallast sá er æðstur kórbræðra?",
@@ -146,11 +265,16 @@ public class ChallengeScript : MonoBehaviour {
         },
 		new Challenge(){
             question = "Hvaða klaustur var stofnað síðast þeirra klaustra sem störfuðu á Íslandi á kaþólskum tíma?",
-            answers = new string[] {"skriðuklaustur"}
+            answers = new string[] {"skriðuklaustur",
+                                    "skriðu",
+                                    "að skriðu",
+                                    "klaustrið að skriðu",
+                                    "skriða"}
         },
 		new Challenge(){
             question = "Hvað voru margir einstiklingar grafnir upp í klausturkirkjugarðinum?",
-            answers = new string[] {"295"}
+            answers = new string[] {"295",
+                                    "tvöhundruðníutíuogfimm"}
         },
     };
 

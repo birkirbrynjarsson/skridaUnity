@@ -25,6 +25,7 @@ public class OpenItemScript : MonoBehaviour {
     public Button playChallenge2;
     public Button playChallenge3;
 
+    public ChallengeScript challenge;
     public PlayMakerFSM fsm;
 
     void Start(){
@@ -63,12 +64,14 @@ public class OpenItemScript : MonoBehaviour {
 	}
 
     public void openChallenge1(){
+        challenge.setChallenge(1);
         fsm.SetState("Challenge");
     }
 
     public void openChallenge2()
     {
         if(level >= 1){
+            challenge.setChallenge(2);
             fsm.SetState("Challenge");   
         }
     }
@@ -76,6 +79,7 @@ public class OpenItemScript : MonoBehaviour {
     public void openChallenge3()
     {
         if (level >= 2){
+            challenge.setChallenge(3);
             fsm.SetState("Challenge");
         }
     }

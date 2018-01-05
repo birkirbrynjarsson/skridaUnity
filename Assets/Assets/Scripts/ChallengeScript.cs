@@ -283,6 +283,7 @@ public class ChallengeScript : MonoBehaviour {
     public Image image;
     public InputField answerInput;
     public string[] answers;
+    public Button submitAnswerButton;
     private int currentChallengeIndex;
 
 	// Use this for initialization

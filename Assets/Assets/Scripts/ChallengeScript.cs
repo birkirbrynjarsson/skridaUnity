@@ -282,8 +282,8 @@ public class ChallengeScript : MonoBehaviour {
                                     "tvöhundruðníutíuogfimm"}
         },
         new Challenge(){
-            question = "?",
-            answers = new string[] {}
+            question = "Botnaðu ljóðið:\n\nKalt er við kórbak,\nkúrir þar Jón Hrak.\nÝtar snúa austur og vestur\n...",
+            answers = new string[] {"allir nema jón hrak"}
         },
         new Challenge(){
             question = "?",

@@ -46,7 +46,18 @@ public class OpenItemScript : MonoBehaviour {
 
 		scrollWrapper.localPosition = new Vector3 (0f, 0f, 0f);
 
-		if (level == 0) {
+        setSpriteButtons();
+	}
+
+    public void levelUpItem(){
+        if(level < 3){
+            this.level++;
+        }
+        setSpriteButtons();
+    }
+
+    void setSpriteButtons(){
+        if (level == 0) {
 			challenge1.overrideSprite = play;
 			challenge2.overrideSprite = locked;
 			challenge3.overrideSprite = locked;
@@ -63,17 +74,17 @@ public class OpenItemScript : MonoBehaviour {
 			challenge2.overrideSprite = finished;
 			challenge3.overrideSprite = finished;
 		}
-	}
+    }
 
     public void openChallenge1(){
-        challenge.setChallenge(0, itemIndex);
+        challenge.setChallenge(0, itemIndex, level);
         fsm.SetState("Challenge");
     }
 
     public void openChallenge2()
     {
         if(level >= 1){
-            challenge.setChallenge(1, itemIndex);
+            challenge.setChallenge(1, itemIndex, level);
             fsm.SetState("Challenge");   
         }
     }
@@ -81,7 +92,7 @@ public class OpenItemScript : MonoBehaviour {
     public void openChallenge3()
     {
         if (level >= 2){
-            challenge.setChallenge(2, itemIndex);
+            challenge.setChallenge(2, itemIndex, level);
             fsm.SetState("Challenge");
         }
     }

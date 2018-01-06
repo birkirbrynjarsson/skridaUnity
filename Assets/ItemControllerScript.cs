@@ -60,6 +60,11 @@ public class ItemControllerScript : MonoBehaviour {
 		}
 	}
 
+    public void updateItem(int index){
+        items[index].levelUp();
+        playerScript.addXpValue(450);
+    }
+
 	void updateCount(){
 		totalItems++;
 		playerMenuTotalItems.text = totalItems.ToString () + " / " + items.Count.ToString();

@@ -43,7 +43,8 @@ public class ChallengeScript : MonoBehaviour {
             question = "Hver leigði klaustrið og allar eignir þess frá danska kónginum sem markaði formleg lok á klausturhaldi að Skriðu?",
             answers = new string[] {"sr. einar árnason",
 									"séra einar árnason",
-									"einar árnason"}
+									"einar árnason",
+                                    "einar"}
         },
 		new Challenge(){
             question = "Hvaða ár var lútherstrú lögleidd í Danmörku?",
@@ -169,14 +170,18 @@ public class ChallengeScript : MonoBehaviour {
             question = "Hvaða synd hafði Sesselja drýgt?",
             answers = new string[] {"kvæntist frænda sínum",
 									"giftist frænda sínum",
+                                    "gifst frænda sínum",
                                     "kvæntist skyldmenni",
                                     "giftist skyldmenni",
+                                    "gifst skyldmenni",
                                     "kvæntist frænda",
                                     "giftist frænda",
+                                    "gifst frænda",
                                     "gekk í hjónaband með frænda",
                                     "gekk í hjónaband með frænda sínum",
                                     "gekk í hjónaband með skyldmenni",
                                     "gekk í hjónaband",
+                                    "gifst",
                                     "giftist",
                                     "kvæntist",
                                     "skyldleiki",
@@ -193,7 +198,33 @@ public class ChallengeScript : MonoBehaviour {
                                     "kvæntist einari frænda",
                                     "giftist fjórmenningi",
                                     "kvæntist fjórmenningi",
-                                    "ósiðlegt hjónaband"}
+                                    "ósiðlegt hjónaband",
+                                    
+                                    "hún kvæntist frænda sínum",
+									"hún giftist frænda sínum",
+                                    "hún kvæntist skyldmenni",
+                                    "hún giftist skyldmenni",
+                                    "hún kvæntist frænda",
+                                    "hún giftist frænda",
+                                    "hún gekk í hjónaband með frænda",
+                                    "hún gekk í hjónaband með frænda sínum",
+                                    "hún gekk í hjónaband með skyldmenni",
+                                    "hún gekk í hjónaband",
+                                    "hún giftist",
+                                    "hún kvæntist",
+                                    "hún giftist einari ormssyni loftssyni hins ríka",
+                                    "hún giftist einari",
+                                    "hún giftist einari ormssyni",
+                                    "hún giftist einari ormssyni loftssyni",
+                                    "hún giftist einari frænda",
+                                    "hún kvæntist einari ormssyni loftssyni hins ríka",
+                                    "hún kvæntist einari",
+                                    "hún kvæntist einari ormssyni",
+                                    "hún kvæntist einari ormssyni loftssyni",
+                                    "hún kvæntist einari frænda",
+                                    "hún giftist fjórmenningi",
+                                    "hún kvæntist fjórmenningi",
+                                    "hún stofnaði til ósiðlegs hjónabands"}
         },
 		new Challenge(){
             question = "Af hverju gaf Sesselja jörðina Skriðu til stofnunar klausturs?",
@@ -258,7 +289,9 @@ public class ChallengeScript : MonoBehaviour {
                                     "augustinusarreglu",
                                     "augustinusarregla",
                                     "regla augustinusar",
-                                    "regla augustinus"}
+                                    "regla augustinus",
+                                    "augustinusar",
+                                    "ágústínusar"}
         },
 		new Challenge(){
             question = "Hvað kallast sá er æðstur kórbræðra?",
@@ -301,10 +334,20 @@ public class ChallengeScript : MonoBehaviour {
     public string[] answers;
     public Button submitAnswerButton;
     private int currentChallengeIndex;
+    private int challengeNr;
+    private int itemIndex;
+    private int itemLevel;
+
+    public Sprite completedImage;
+    public Sprite incompleteImage;
+
+    public PlayMakerFSM fsm;
+    public ItemControllerScript itemController;
+    public OpenItemScript openItem;
 
 	// Use this for initialization
 	void Start () {
-
+        submitAnswerButton.onClick.AddListener(tryAnswer);
 	}
 	
 	// Update is called once per frame
@@ -312,8 +355,12 @@ public class ChallengeScript : MonoBehaviour {
 		
 	}
 
-    public void setChallenge(int challengeIndex, int itemIndex){
+    public void setChallenge(int challengeIndex, int itemIndex, int itemLevel){
+        this.itemLevel = itemLevel;
+        this.itemIndex = itemIndex;
+        this.challengeNr = challengeIndex;
         currentChallengeIndex = (itemIndex * 3) + challengeIndex;
+        answerInput.text = "";
         question.text = challenges[currentChallengeIndex].question;
     }
 
@@ -322,6 +369,7 @@ public class ChallengeScript : MonoBehaviour {
         // First iteration.
         // Only change answer to lowercase.
         string input = answerInput.text.ToLower();
+        string tempAnswer = "";
 
         foreach(string answer in challenge.answers){
             if(input == answer){
@@ -336,10 +384,10 @@ public class ChallengeScript : MonoBehaviour {
         input = parseIcelandicLetters(input);
 
         for (int i = 0; i < challenge.answers.Length; i++) {
-            challenge.answers[i] = removeNonLetters(challenge.answers[i]);
-            challenge.answers[i] = parseIcelandicLetters(challenge.answers[i]);
+            tempAnswer = removeNonLetters(challenge.answers[i]);
+            tempAnswer = parseIcelandicLetters(tempAnswer);
 
-            if(input == challenge.answers[i]){
+            if(input == tempAnswer){
                 correctAnswer();
                 return;
             }
@@ -351,11 +399,16 @@ public class ChallengeScript : MonoBehaviour {
     }
 
     void correctAnswer(){
-        UIManager.ShowNotification("ItemNotification", 10f, true, "Fjársjóðsfundur!");
+        UIManager.ShowNotification("MessageNotification", 10f, true, "Vel gert!", "\"" + answerInput.text + "\"\n er rétt svar", completedImage);
+        if(challengeNr == itemLevel){
+            itemController.updateItem(itemIndex);
+            openItem.levelUpItem();
+        }
+        fsm.SetState("OpenItem");
     }
 
     void wrongAnswer(){
-        
+        UIManager.ShowNotification("NoStarNotification", 10f, true, "Því miður", "rangt svar!\nreyndu aftur!", incompleteImage);
     }
 
     /// <summary>

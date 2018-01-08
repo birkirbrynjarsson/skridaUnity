@@ -142,6 +142,8 @@ public class ChallengeScript : MonoBehaviour {
 									"hæli",
 									"læknamiðstöð",
                                     "lækningar",
+                                    "lækna",
+                                    "læknunar",
                                     "læknir",
                                     "sjúkra",
                                     "hjúkrunarheimili",
@@ -412,8 +414,7 @@ public class ChallengeScript : MonoBehaviour {
     }
 
     /// <summary>
-    /// Removes all spaces, dots and slashes from a string and returns
-    /// the resulting string.
+    /// Removes non letters and returns the resulting string.
     /// </summary>
     string removeNonLetters(string str) {
         str = str.Replace(" ", string.Empty);

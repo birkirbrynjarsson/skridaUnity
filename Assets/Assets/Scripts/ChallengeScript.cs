@@ -293,7 +293,8 @@ public class ChallengeScript : MonoBehaviour {
                                     "regla augustinusar",
                                     "regla augustinus",
                                     "augustinusar",
-                                    "ágústínusar"}
+                                    "ágústínusar",
+                                    "ágústínus"}
         },
 		new Challenge(){
             question = "Hvað kallast sá er æðstur kórbræðra?",

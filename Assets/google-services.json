@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "826629723509",
+    "firebase_url": "https://skriduklaustur-unity.firebaseio.com",
+    "project_id": "skriduklaustur-unity",
+    "storage_bucket": "skriduklaustur-unity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826629723509:android:3a01799d4a0b0789",
+        "android_client_info": {
+          "package_name": "com.skriduklaustur.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826629723509-2gtlq83ubhsu2qpk1hkfggm0vhni8jom.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOJt066Jn0C3_Wx6LS1yTZqwB6GXAv-VM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

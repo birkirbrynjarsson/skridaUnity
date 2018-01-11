@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DoozyUI;
 
 public class PlayerControllerScript : MonoBehaviour {
 
@@ -20,6 +21,8 @@ public class PlayerControllerScript : MonoBehaviour {
 	public Text playerMenuLvlText;
 	public Text playerMenuXpText;
 	public Text playerMenuTotalXpText;
+    public Sprite levelUpNotificationStar;
+    public Sprite titleMedal;
 
 	public string sex;
 	public Button maleButton;
@@ -37,6 +40,7 @@ public class PlayerControllerScript : MonoBehaviour {
 	public int totalXp;
 	public int currentXp;
 	public int levelXp;
+    public int newTitleLevels;
 
 	// Player HUD
 	public Button addXpButton;
@@ -45,6 +49,13 @@ public class PlayerControllerScript : MonoBehaviour {
 	public Text lvlText;
 	public Text xpText;
 	public GameObject XPFirework1;
+
+    private string[,] titles = {
+        {"Vinnumaður", "Nemandi", "Munkur", "Prestvígður Munkur", "Príor", "Ábóti", "Skálholtsbiskup"},
+        {"Vinnukona", "Nemandi", "Nunna", "Prestvígð Nunna", "Príorinna", "Abbadís", "Skálholtsbiskup"}
+    };
+
+    private string[] titleText = {"brumtiss", "barabadibbidibb", "jejeje"};
 
 	// Use this for initialization
 	void Start () {
@@ -103,7 +114,7 @@ public class PlayerControllerScript : MonoBehaviour {
 				"oncompleteparams", newXp
 			));
 
-			goUpLevel ();
+			goUpLevel (newXp);
 
 		} else {
 
@@ -146,7 +157,7 @@ public class PlayerControllerScript : MonoBehaviour {
 		XpProgressBar.sizeDelta = position;
 	}
 
-	void goUpLevel(){
+	void goUpLevel(int addXp){
 		lvlStar.transform.localScale = new Vector3 (2.4f, 2.4f, 1f);
 		Vector3 scaleTo = new Vector3 (5f, 5f, 1f);
 		iTween.PunchScale (lvlStar, iTween.Hash(
@@ -160,7 +171,10 @@ public class PlayerControllerScript : MonoBehaviour {
 		playerMenuLvlText.text = level.ToString ();
 		lvlFlash.SetActive (false);
 		lvlFlash.SetActive (true);
-		updateTitle ();
+        UIManager.ShowNotification("LevelNotification", 10f, true, level.ToString(), "Til lukku!\nÞú hefur farið upp um stig (level)\nHeildar stigafjöldi: " + (totalXp + addXp).ToString() + " XP", levelUpNotificationStar);
+        if(level % newTitleLevels == 0){
+            updateTitle ();
+        }
 	}
 
 	void resetStarScale(){
@@ -179,49 +193,57 @@ public class PlayerControllerScript : MonoBehaviour {
 		sex = "male";
 		maleImage.sprite = maleBtnActive;
 		femaleImage.sprite = femaleBtnInactive;
-		updateTitle ();
+		playerTitle.text = titles[0, level/newTitleLevels];
 	}
 
 	void femaleClicked(){
 		sex = "female";
 		femaleImage.sprite = femaleBtnActive;
 		maleImage.sprite = maleBtnInactive;
-		updateTitle ();
+        playerTitle.text = titles[1, level/newTitleLevels];
 	}
 
 	void updateTitle(){
 		if (sex == "female") {
-			if (level >= 24) {
-				playerTitle.text = "Skálholtsbiskup";
-			} else if (level >= 20) {
-				playerTitle.text = "Abbadís";
-			} else if (level >= 16) {
-				playerTitle.text = "Príorinna";
-			} else if (level >= 12) {
-				playerTitle.text = "Prestvígð Nunna";
-			} else if (level >= 8) {
-				playerTitle.text = "Nunna / Reglusystir";
-			} else if (level >= 4) {
-				playerTitle.text = "Nemandi";
-			} else {
-				playerTitle.text = "Vinnukona";
-			}
+            if(level/newTitleLevels < titles.GetLength(0)){
+                playerTitle.text = titles[0, level/newTitleLevels];
+                UIManager.ShowNotification("TitleNotification", 10f, true, titles[0, level/newTitleLevels], titleText[level/newTitleLevels], titleMedal);
+            }
+			// if (level >= 24) {
+			// 	playerTitle.text = "Skálholtsbiskup";
+			// } else if (level >= 20) {
+			// 	playerTitle.text = "Abbadís";
+			// } else if (level >= 16) {
+			// 	playerTitle.text = "Príorinna";
+			// } else if (level >= 12) {
+			// 	playerTitle.text = "Prestvígð Nunna";
+			// } else if (level >= 8) {
+			// 	playerTitle.text = "Nunna / Reglusystir";
+			// } else if (level >= 4) {
+			// 	playerTitle.text = "Nemandi";
+			// } else {
+			// 	playerTitle.text = "Vinnukona";
+			// }
 		} else {
-			if (level >= 24) {
-				playerTitle.text = "Skálholtsbiskup";
-			} else if (level >= 20) {
-				playerTitle.text = "Ábóti";
-			} else if (level >= 16) {
-				playerTitle.text = "Príor";
-			} else if (level >= 12) {
-				playerTitle.text = "Prestvígður Munkur";
-			} else if (level >= 8) {
-				playerTitle.text = "Munkur / Reglubróðir";
-			} else if (level >= 4) {
-				playerTitle.text = "Nemandi";
-			} else {
-				playerTitle.text = "Vinnumaður";
-			}
+            if(level/newTitleLevels < titles.GetLength(1)){
+                playerTitle.text = titles[1, level/newTitleLevels];
+                UIManager.ShowNotification("TitleNotification", 10f, true, titles[1, level/newTitleLevels], titleText[level/newTitleLevels], titleMedal);
+            }
+			// if (level >= 24) {
+			// 	playerTitle.text = "Skálholtsbiskup";
+			// } else if (level >= 20) {
+			// 	playerTitle.text = "Ábóti";
+			// } else if (level >= 16) {
+			// 	playerTitle.text = "Príor";
+			// } else if (level >= 12) {
+			// 	playerTitle.text = "Prestvígður Munkur";
+			// } else if (level >= 8) {
+			// 	playerTitle.text = "Munkur / Reglubróðir";
+			// } else if (level >= 4) {
+			// 	playerTitle.text = "Nemandi";
+			// } else {
+			// 	playerTitle.text = "Vinnumaður";
+			// }
 		}
 	}
 }

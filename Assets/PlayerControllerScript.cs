@@ -23,6 +23,9 @@ public class PlayerControllerScript : MonoBehaviour {
 	public Text playerMenuTotalXpText;
     public Sprite levelUpNotificationStar;
     public Sprite titleMedal;
+    private bool initialNameChange = true;
+    private bool initialSexChange = true;
+    private bool initialPlayerMenuOpened = true;
 
 	public string sex;
 	public Button maleButton;
@@ -55,7 +58,15 @@ public class PlayerControllerScript : MonoBehaviour {
         {"Vinnukona", "Nemandi", "Nunna", "Prestvígð Nunna", "Príorinna", "Abbadís", "Skálholtsbiskup"}
     };
 
-    private string[] titleText = {"brumtiss", "barabadibbidibb", "jejeje"};
+    private string[] titleText = {
+        "Árið er 1493 og þú ert ungur og guðhræddur vinnumaður úr Fljótsdal. Á leið þinni til Kaupstaðar einn blíðviðrisdag í Júní ríður þú heim að Skriðuklaustri þar sem þér er boðin vinna. Þú þiggur það með þökkum.",
+        "Príorinn á Skriðuklaustri hefur fylgst með þér undanfarið og dáist að vinnusemi þinni, hann vill endilega bjóða þér að nema við klaustrið.\nÞú þiggur einstakt boð og sest á skólabekk.",
+        "Þú hefur lært margt í námi þínu við klaustrið og eftir að hafa fylgst náið með starfseminni þar er vilji þinn að gerast þjónn Guðs.\nReglubræðurnir taka þér fagnandi, þú iðkar trúnna af reglusemi og hjálpar hina sjúku sem leita á náðir klaustursins af bestu geti.",
+        "Þú hefur numið Guðs orð af mikilli samviskusemi og ert boðinn að taka aukna ábyrgð innan reglunnar sem prestur. Það gleður þig að boða hið heilaga orð í þessu nýja hlutverki.",
+        "Skálholtsbiskup er uppnuminn yfir því góða starfi sem þú hefur unnið sem prestur og útnefnir þig príor yfir reglunni undir ábótavaldi sínu.",
+        "Að launum fyrir velgengni þína í starfi príors og skuldbindingu þína við Guð ánafnar Skálholtsbiskup þér ábótavald sitt yfir Skriðuklaustri.",
+        "Skálholtsbiskup sest í helgan stein en ánefnir þig sem eftirmann sinn. Þú ert valdamesti þjónn kirkjunnar á Íslandi."
+    };
 
 	// Use this for initialization
 	void Start () {
@@ -171,7 +182,7 @@ public class PlayerControllerScript : MonoBehaviour {
 		playerMenuLvlText.text = level.ToString ();
 		lvlFlash.SetActive (false);
 		lvlFlash.SetActive (true);
-        UIManager.ShowNotification("LevelNotification", 10f, true, level.ToString(), "Til lukku!\nÞú hefur farið upp um stig (level)\nHeildar stigafjöldi: " + (totalXp + addXp).ToString() + " XP", levelUpNotificationStar);
+        UIManager.ShowNotification("LevelNotification", 10f, true, level.ToString(), "Til lukku!\nÞú hefur farið upp um stig.\nHeildar stigafjöldi: " + (totalXp + addXp).ToString() + " XP", levelUpNotificationStar);
         if(level % newTitleLevels == 0){
             updateTitle ();
         }
@@ -187,6 +198,10 @@ public class PlayerControllerScript : MonoBehaviour {
 	void updatePlayerName(string value){
 		playerName = value;
 		playerNameText.text = playerName;
+        if(initialNameChange){
+            initialNameChange = false;
+            addXpValue(800);
+        }
 	}
 
 	void maleClicked(){
@@ -194,6 +209,10 @@ public class PlayerControllerScript : MonoBehaviour {
 		maleImage.sprite = maleBtnActive;
 		femaleImage.sprite = femaleBtnInactive;
 		playerTitle.text = titles[0, level/newTitleLevels];
+        if(initialSexChange){
+            initialSexChange = false;
+            addXpValue(300);
+        }
 	}
 
 	void femaleClicked(){
@@ -201,49 +220,33 @@ public class PlayerControllerScript : MonoBehaviour {
 		femaleImage.sprite = femaleBtnActive;
 		maleImage.sprite = maleBtnInactive;
         playerTitle.text = titles[1, level/newTitleLevels];
+        if(initialSexChange){
+            initialSexChange = false;
+            addXpValue(300);
+        }
 	}
 
 	void updateTitle(){
 		if (sex == "female") {
             if(level/newTitleLevels < titles.GetLength(0)){
                 playerTitle.text = titles[0, level/newTitleLevels];
-                UIManager.ShowNotification("TitleNotification", 10f, true, titles[0, level/newTitleLevels], titleText[level/newTitleLevels], titleMedal);
+                UIManager.ShowNotification("TitleNotification", 0f, true, titles[0, level/newTitleLevels], titleText[level/newTitleLevels], titleMedal);
             }
-			// if (level >= 24) {
-			// 	playerTitle.text = "Skálholtsbiskup";
-			// } else if (level >= 20) {
-			// 	playerTitle.text = "Abbadís";
-			// } else if (level >= 16) {
-			// 	playerTitle.text = "Príorinna";
-			// } else if (level >= 12) {
-			// 	playerTitle.text = "Prestvígð Nunna";
-			// } else if (level >= 8) {
-			// 	playerTitle.text = "Nunna / Reglusystir";
-			// } else if (level >= 4) {
-			// 	playerTitle.text = "Nemandi";
-			// } else {
-			// 	playerTitle.text = "Vinnukona";
-			// }
 		} else {
             if(level/newTitleLevels < titles.GetLength(1)){
                 playerTitle.text = titles[1, level/newTitleLevels];
-                UIManager.ShowNotification("TitleNotification", 10f, true, titles[1, level/newTitleLevels], titleText[level/newTitleLevels], titleMedal);
+                UIManager.ShowNotification("TitleNotification", 0f, true, titles[1, level/newTitleLevels], titleText[level/newTitleLevels], titleMedal);
             }
-			// if (level >= 24) {
-			// 	playerTitle.text = "Skálholtsbiskup";
-			// } else if (level >= 20) {
-			// 	playerTitle.text = "Ábóti";
-			// } else if (level >= 16) {
-			// 	playerTitle.text = "Príor";
-			// } else if (level >= 12) {
-			// 	playerTitle.text = "Prestvígður Munkur";
-			// } else if (level >= 8) {
-			// 	playerTitle.text = "Munkur / Reglubróðir";
-			// } else if (level >= 4) {
-			// 	playerTitle.text = "Nemandi";
-			// } else {
-			// 	playerTitle.text = "Vinnumaður";
-			// }
 		}
 	}
+
+    public void revealTitle(){
+        if(initialPlayerMenuOpened){
+            initialPlayerMenuOpened = false;
+            if(level < 4){
+                UIManager.ShowNotification("TitleNotification", 0f, true, titles[0, level/newTitleLevels], titleText[level/newTitleLevels], titleMedal);
+            }
+            addXpValue(300);
+        }
+    }
 }

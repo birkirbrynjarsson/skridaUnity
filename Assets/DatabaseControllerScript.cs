@@ -5,47 +5,40 @@ using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
 
-public class DatabaseControllerScript : MonoBehaviour {
+namespace Skrida.Database {
+	public class DatabaseControllerScript : MonoBehaviour {
 
-	private DatabaseReference reference;
+		private DatabaseReference reference;
+		public static IList challenges;
 
-	// Use this for initialization
-	void Start () {
-		// Set this before calling into the realtime database.
-    	FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://skriduklaustur-unity.firebaseio.com/");
+		// Use this for initialization
+		void Start () {
+			// Set this before calling into the realtime database.
+			FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://skriduklaustur-unity.firebaseio.com/");
 
-		// Get the root reference location of the database.
-    	reference = FirebaseDatabase.DefaultInstance.RootReference;
+			// Get the root reference location of the database.
+			reference = FirebaseDatabase.DefaultInstance.RootReference;
 
 
-		// TESTING FIREBASE STUFF
-		FirebaseDatabase.DefaultInstance
-		.GetReference("challenges")
-		.GetValueAsync().ContinueWith(task => {
-			if (task.IsFaulted) {
-				// Handle the error...
-				Debug.Log("Failed to get information from Firebase");
-			}
-			else if (task.IsCompleted) {
-				DataSnapshot snapshot = task.Result;
-				//snapshot.
-				// Do something with snapshot...
-				foreach(DataSnapshot child in snapshot.Children) {
-					IDictionary dict = (IDictionary)child.Value;
-					IList answers = (IList)dict["answers"];
-
-					Debug.Log(dict["question"]);
-					foreach (string answer in answers) {
-						Debug.Log(answer);
-					}
-					Debug.Log("----------------------------------");
+			// TESTING FIREBASE STUFF
+			FirebaseDatabase.DefaultInstance
+			.GetReference("challenges")
+			.GetValueAsync().ContinueWith(task => {
+				if (task.IsFaulted) {
+					// Handle the error...
+					Debug.Log("Failed to get challenges information from Firebase");
 				}
-			}
-		});
-	}
-	
-	// Update is called once per frame
-	void Update () {
+				else if (task.IsCompleted) {
+					// List of all challenges
+					// Each entry is an IDictionary with keys "question" and "answers"
+					challenges = (IList)task.Result.Value;				
+				}
+			});
+		}
 		
+		// Update is called once per frame
+		void Update () {
+			
+		}
 	}
 }

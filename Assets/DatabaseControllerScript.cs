@@ -7,13 +7,15 @@ using Firebase.Unity.Editor;
 
 public class DatabaseControllerScript : MonoBehaviour {
 
+	private DatabaseReference reference;
+
 	// Use this for initialization
 	void Start () {
 		// Set this before calling into the realtime database.
     	FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://skriduklaustur-unity.firebaseio.com/");
 
 		// Get the root reference location of the database.
-    	DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+    	reference = FirebaseDatabase.DefaultInstance.RootReference;
 
 
 		// TESTING FIREBASE STUFF

@@ -28,8 +28,18 @@ public class DatabaseControllerScript : MonoBehaviour {
 			}
 			else if (task.IsCompleted) {
 				DataSnapshot snapshot = task.Result;
+				//snapshot.
 				// Do something with snapshot...
-				Debug.Log(snapshot.Children);
+				foreach(DataSnapshot child in snapshot.Children) {
+					IDictionary dict = (IDictionary)child.Value;
+					IList answers = (IList)dict["answers"];
+
+					Debug.Log(dict["question"]);
+					foreach (string answer in answers) {
+						Debug.Log(answer);
+					}
+					Debug.Log("----------------------------------");
+				}
 			}
 		});
 	}

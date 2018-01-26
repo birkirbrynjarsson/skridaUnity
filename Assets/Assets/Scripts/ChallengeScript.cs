@@ -4,9 +4,10 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using DoozyUI;
+using Skrida.Database;
 
 public class ChallengeScript : MonoBehaviour {
-
+    /*
     public List<Challenge> challenges = new List<Challenge>(){
         new Challenge(){
             question = "Hvaða ár var Skriðuklausturskirkjan vígð?",
@@ -330,6 +331,7 @@ public class ChallengeScript : MonoBehaviour {
             answers = new string[] {}
         },
     };
+    */
 
     public Text question;
     public Image image;
@@ -364,17 +366,23 @@ public class ChallengeScript : MonoBehaviour {
         this.challengeNr = challengeIndex;
         currentChallengeIndex = (itemIndex * 3) + challengeIndex;
         answerInput.text = "";
-        question.text = challenges[currentChallengeIndex].question;
+        //question.text = challenges[currentChallengeIndex].question;
+
+        // Get question from Firebase database
+        question.text = (string)((IDictionary)DatabaseControllerScript.challenges[currentChallengeIndex])["question"];
     }
 
     void tryAnswer() {
-        Challenge challenge = challenges[currentChallengeIndex];
+        //Challenge challenge = challenges[currentChallengeIndex];
         // First iteration.
         // Only change answer to lowercase.
         string input = answerInput.text.ToLower();
         string tempAnswer = "";
 
-        foreach(string answer in challenge.answers){
+        // Get list of correct answers from Firebase database
+        IList answers = (IList)((IDictionary)DatabaseControllerScript.challenges[currentChallengeIndex])["answers"];
+
+        foreach(string answer in answers){
             if(input == answer){
                 correctAnswer();
                 return;
@@ -386,8 +394,8 @@ public class ChallengeScript : MonoBehaviour {
         input = removeNonLetters(input);
         input = parseIcelandicLetters(input);
 
-        for (int i = 0; i < challenge.answers.Length; i++) {
-            tempAnswer = removeNonLetters(challenge.answers[i]);
+        for (int i = 0; i < answers.Count; i++) {
+            tempAnswer = removeNonLetters((string)answers[i]);
             tempAnswer = parseIcelandicLetters(tempAnswer);
 
             if(input == tempAnswer){
@@ -472,8 +480,9 @@ public class ChallengeScript : MonoBehaviour {
         return strBuilder.ToString();
     }
 }
-
+/*
 public class Challenge {
     public string question;
     public string[] answers;
 }
+*/

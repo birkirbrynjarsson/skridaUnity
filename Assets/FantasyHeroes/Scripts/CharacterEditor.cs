@@ -67,6 +67,25 @@ namespace Assets.FantasyHeroes.Scripts
         /// Open palette to change sprite color
         /// </summary>
         /// <param name="target">Pass one of the following values: Head, Ears, Body, Hair, Eyes, Mouth</param>
+
+        public void setTarget(string target){
+            switch (target)
+            {
+                case "Head": _target = target; break;
+                case "Ears": _target = target; break;
+                case "Body": _target = target; break;
+                case "Hair": _target = target; break;
+                case "Eyebrows": _target = target; break;
+                case "Eyes": _target = target; break;
+                case "Mouth": _target = target; break;
+                case "Beard": _target = target; break;
+            }
+        }
+
+        /// <summary>
+        /// Open palette to change sprite color
+        /// </summary>
+        /// <param name="target">Pass one of the following values: Head, Ears, Body, Hair, Eyes, Mouth</param>
         public void OpenPalette(string target)
         {
             _target = target;

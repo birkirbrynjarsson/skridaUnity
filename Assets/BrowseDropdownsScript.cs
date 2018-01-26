@@ -30,7 +30,7 @@ public class BrowseDropdownsScript : MonoBehaviour {
 		if (currentActive >= dropdowns.Count) {
 			currentActive = 0;
 		}
-		if (currentActive == 0 || currentActive == 1 || currentActive == 7 || currentActive == 12 || currentActive == 13 || currentActive == 15) {
+		if (currentActive == 0 || currentActive == 1 || currentActive == 10 || currentActive == 15 || currentActive == 16 || currentActive == 18) {
 			nextDropdown ();
 		}
 		dropdowns [currentActive].gameObject.SetActive (true);
@@ -42,7 +42,7 @@ public class BrowseDropdownsScript : MonoBehaviour {
 		if (currentActive < 0) {
 			currentActive = dropdowns.Count - 1;
 		}
-		if (currentActive == 0 || currentActive == 1 || currentActive == 7 || currentActive == 12 || currentActive == 13 || currentActive == 15) {
+		if (currentActive == 0 || currentActive == 1 || currentActive == 10 || currentActive == 15 || currentActive == 16 || currentActive == 18) {
 			prevDropdown ();
 		}
 		dropdowns [currentActive].gameObject.SetActive (true);

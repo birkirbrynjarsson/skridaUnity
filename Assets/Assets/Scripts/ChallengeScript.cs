@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DoozyUI;
 using Skrida.Database;
+using Skrida.Utilities;
 
 public class ChallengeScript : MonoBehaviour {
     /*
@@ -354,11 +355,6 @@ public class ChallengeScript : MonoBehaviour {
 	void Start () {
         submitAnswerButton.onClick.AddListener(tryAnswer);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void setChallenge(int challengeIndex, int itemIndex, int itemLevel){
         this.itemLevel = itemLevel;
@@ -384,7 +380,7 @@ public class ChallengeScript : MonoBehaviour {
 
         foreach(string answer in answers){
             if(input == answer){
-                correctAnswer();
+                correctAnswer(input);
                 return;
             }
         }
@@ -398,10 +394,11 @@ public class ChallengeScript : MonoBehaviour {
             tempAnswer = removeNonLetters((string)answers[i]);
             tempAnswer = parseIcelandicLetters(tempAnswer);
 
-            if(input == tempAnswer){
-                correctAnswer();
+            if(input == tempAnswer || JaroWinkler.Similarity(input, tempAnswer) > 0.9) {
+                correctAnswer((string)answers[i]);
                 return;
             }
+            
         }
 
         // Did not find the correct answer
@@ -409,8 +406,8 @@ public class ChallengeScript : MonoBehaviour {
         return;
     }
 
-    void correctAnswer(){
-        UIManager.ShowNotification("MessageNotification", 10f, true, "Vel gert!", "\"" + answerInput.text + "\"\n er rétt svar", completedImage);
+    void correctAnswer(string correctAnswer) {
+        UIManager.ShowNotification("MessageNotification", 10f, true, "Vel gert!", "\"" + correctAnswer + "\"\n er rétt svar", completedImage);
         if(challengeNr == itemLevel){
             itemController.updateItem(itemIndex);
             openItem.levelUpItem();

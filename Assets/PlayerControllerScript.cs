@@ -53,6 +53,9 @@ public class PlayerControllerScript : MonoBehaviour {
 	public Text xpText;
 	public GameObject XPFirework1;
 
+	// Item Controller, Cheats
+	public ItemControllerScript itemController;
+
     private string[,] titles = {
         {"Vinnumaður", "Nemandi", "Munkur", "Prestvígður Munkur", "Príor", "Ábóti", "Skálholtsbiskup"},
         {"Vinnukona", "Nemandi", "Nunna", "Prestvígð Nunna", "Príorinna", "Abbadís", "Skálholtsbiskup"}
@@ -202,6 +205,9 @@ public class PlayerControllerScript : MonoBehaviour {
             initialNameChange = false;
             addXpValue(800);
         }
+		if(playerName == "gulurbirkir"){
+			itemController.findAllItems();
+		}
 	}
 
 	void maleClicked(){

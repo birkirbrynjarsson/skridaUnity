@@ -42,6 +42,12 @@ public class ItemControllerScript : MonoBehaviour {
 		updateCount ();
 	}
 
+	public void findAllItems(){
+		for(int i = 0; i < items.Count; i++){
+			findItem(i);
+		}
+	}
+
 	void updateItem(){
 		int tries = 0;
 		int i = rand.Next (items.Count);

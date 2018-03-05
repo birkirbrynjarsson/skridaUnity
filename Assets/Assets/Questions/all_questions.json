@@ -174,19 +174,20 @@
 		{
 			"question": "Hverskonar stofnun var rekin í klaustrinu á Skriðu?",
             "answers": [
-            	"sjúkrahús",
 				"hæli sjúkra",
 				"hæli",
 				"læknamiðstöð",
-                "lækningar",
-                "lækna",
-                "læknunar",
-                "læknir",
-                "sjúkra",
-                "hjúkrunarheimili",
+            	"sjúkrahús",
                 "hjúkrun",
+                "hjúkrunarheimili",
+                "hospítal",
+                "lækna",
+                "lækningar",
+                "læknir",
                 "læknun",
-                "hospítal"
+                "læknunar",
+                "sjúkra",
+                "spítali"
             ]
 		},
 		{

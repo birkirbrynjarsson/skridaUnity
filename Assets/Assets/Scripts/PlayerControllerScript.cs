@@ -20,7 +20,6 @@ public class PlayerControllerScript : MonoBehaviour
     public float progressMaxWidth;
 
     // Player Menu
-    public string playerName;
     public Text playerNameText;
     public InputField playerNameInput;
     public Text playerTitle;
@@ -29,11 +28,7 @@ public class PlayerControllerScript : MonoBehaviour
     public Text playerMenuTotalXpText;
     public Sprite levelUpNotificationStar;
     public Sprite titleMedal;
-    private bool initialNameChange = true;
-    private bool initialSexChange = true;
-    private bool initialPlayerMenuOpened = true;
 
-    public string sex;
     public Button maleButton;
     public Image maleImage;
     public Sprite maleBtnInactive;
@@ -45,9 +40,6 @@ public class PlayerControllerScript : MonoBehaviour
 
 
     // Common info
-    public int level;
-    public int totalXp;
-    public int currentXp;
     public int levelXp;
     public int newTitleLevels;
 
@@ -67,14 +59,21 @@ public class PlayerControllerScript : MonoBehaviour
         {"Vinnukona", "Nemandi", "Nunna", "Prestvígð Nunna", "Príorinna", "Abbadís", "Skálholtsbiskup"}
     };
 
-    private string[] titleText = {
-        "Árið er 1493 og þú ert ungur og guðhræddur vinnumaður úr Fljótsdal. Á leið þinni til Kaupstaðar einn blíðviðrisdag í Júní ríður þú heim að Skriðuklaustri þar sem þér er boðin vinna. Þú þiggur það með þökkum.",
+    private string[,] titleText = {
+        {"Árið er 1493 og þú ert ungur og guðhræddur vinnumaður úr Fljótsdal. Á leið þinni til Kaupstaðar einn blíðviðrisdag í Júní ríður þú heim að Skriðuklaustri þar sem þér er boðin vinna. Þú þiggur það með þökkum.",
         "Príorinn á Skriðuklaustri hefur fylgst með þér undanfarið og dáist að vinnusemi þinni, hann vill endilega bjóða þér að nema við klaustrið.\nÞú þiggur einstakt boð og sest á skólabekk.",
-        "Þú hefur lært margt í námi þínu við klaustrið og eftir að hafa fylgst náið með starfseminni þar er vilji þinn að gerast þjónn Guðs.\nReglubræðurnir taka þér fagnandi, þú iðkar trúnna af reglusemi og hjálpar hina sjúku sem leita á náðir klaustursins af bestu geti.",
+        "Þú hefur lært margt í námi þínu við klaustrið og eftir að hafa fylgst náið með starfseminni þar er vilji þinn að gerast þjónn Guðs.\nReglubræðurnir taka þér fagnandi, þú iðkar trúnna af reglusemi og hjálpar hina sjúku sem leita á náðir klaustursins af bestu getu.",
         "Þú hefur numið Guðs orð af mikilli samviskusemi og ert boðinn að taka aukna ábyrgð innan reglunnar sem prestur. Það gleður þig að boða hið heilaga orð í þessu nýja hlutverki.",
         "Skálholtsbiskup er uppnuminn yfir því góða starfi sem þú hefur unnið sem prestur og útnefnir þig príor yfir reglunni undir ábótavaldi sínu.",
         "Að launum fyrir velgengni þína í starfi príors og skuldbindingu þína við Guð ánafnar Skálholtsbiskup þér ábótavald sitt yfir Skriðuklaustri.",
-        "Skálholtsbiskup sest í helgan stein en ánefnir þig sem eftirmann sinn. Þú ert valdamesti þjónn kirkjunnar á Íslandi."
+        "Skálholtsbiskup sest í helgan stein en ánefnir þig sem eftirmann sinn. Þú ert valdamesti þjónn kirkjunnar á Íslandi."},
+        {"Árið er 1493 og þú ert ung og guðhrædd vinnukona úr Fljótsdal. Á leið þinni til Kaupstaðar einn blíðviðrisdag í Júní ríður þú heim að Skriðuklaustri þar sem þér er boðin vinna. Þú þiggur það með þökkum.",
+        "Príorinn á Skriðuklaustri hefur fylgst með þér undanfarið og dáist að vinnusemi þinni, hann vill endilega bjóða þér að nema við klaustrið.\nÞú þiggur einstakt boð og sest á skólabekk.",
+        "Þú hefur lært margt í námi þínu við klaustrið og eftir að hafa fylgst náið með starfseminni þar er vilji þinn að gerast þjónn Guðs.\nReglubræðurnir taka þér fagnandi, þú iðkar trúnna af reglusemi og hjálpar hina sjúku sem leita á náðir klaustursins af bestu getu.",
+        "Þú hefur numið Guðs orð af mikilli samviskusemi og ert boðin að taka aukna ábyrgð innan reglunnar sem prestur. Það gleður þig að boða hið heilaga orð í þessu nýja hlutverki.",
+        "Skálholtsbiskup er uppnuminn yfir því góða starfi sem þú hefur unnið sem prestur og útnefnir þig príor yfir reglunni undir ábótavaldi sínu.",
+        "Að launum fyrir velgengni þína í starfi príors og skuldbindingu þína við Guð ánafnar Skálholtsbiskup þér ábótavald sitt yfir Skriðuklaustri.",
+        "Skálholtsbiskup sest í helgan stein en ánefnir þig sem eftirmann sinn. Þú ert valdamesti þjónn kirkjunnar á Íslandi."}
     };
 
     // Use this for initialization
@@ -88,15 +87,9 @@ public class PlayerControllerScript : MonoBehaviour
         maleButton.onClick.AddListener(maleClicked);
         femaleButton.onClick.AddListener(femaleClicked);
 
-        lvlText.text = level.ToString();
+        lvlText.text = player.level.ToString();
 
         // Event listeners to gain XP
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void LoadPlayer()
@@ -166,21 +159,21 @@ public class PlayerControllerScript : MonoBehaviour
 
     public void addXpValue(int newXp)
     {
-        if (currentXp == 0)
+        if (player.currentXp == 0)
         {
             XpProgressBar.sizeDelta = new Vector2(0f, progressHeight);
             XpProgressBar.GetComponent<Image>().color = new Color32(185, 221, 51, 255);
         }
-        if (currentXp + newXp >= levelXp)
+        if (player.currentXp + newXp >= levelXp)
         {
 
-            totalXp += levelXp - currentXp;
-            currentXp += newXp;
-            newXp = currentXp - levelXp;
-            currentXp = 0;
+            player.totalXp += levelXp - player.currentXp;
+            player.currentXp += newXp;
+            newXp = player.currentXp - levelXp;
+            player.currentXp = 0;
 
             XpProgressBar.GetComponent<Image>().color = new Color32(255, 223, 0, 255);
-            xpText.text = currentXp.ToString() + " / " + levelXp.ToString() + " XP";
+            xpText.text = player.currentXp.ToString() + " / " + levelXp.ToString() + " XP";
 
             Vector2 targetPosition = new Vector2(progressMaxWidth, progressHeight);
             iTween.ValueTo(XpProgressBar.gameObject, iTween.Hash(
@@ -200,14 +193,14 @@ public class PlayerControllerScript : MonoBehaviour
         else
         {
 
-            totalXp += newXp;
-            currentXp += newXp;
+            player.totalXp += newXp;
+            player.currentXp += newXp;
 
-            xpText.text = currentXp.ToString() + " / " + levelXp.ToString() + " XP";
+            xpText.text = player.currentXp.ToString() + " / " + levelXp.ToString() + " XP";
             XPFirework1.SetActive(false);
             XPFirework1.SetActive(true);
 
-            progressWidth = (float)currentXp / levelXp * progressMaxWidth;
+            progressWidth = (float)player.currentXp / levelXp * progressMaxWidth;
             Vector2 targetPosition = new Vector2(progressWidth, progressHeight);
             iTween.ValueTo(XpProgressBar.gameObject, iTween.Hash(
                 "from", XpProgressBar.sizeDelta,
@@ -217,13 +210,13 @@ public class PlayerControllerScript : MonoBehaviour
                 "onupdate", "moveGuiElement"
             ));
         }
-        playerMenuXpText.text = currentXp.ToString() + " / " + levelXp.ToString() + " XP";
-        playerMenuTotalXpText.text = totalXp.ToString() + " XP";
+        playerMenuXpText.text = player.currentXp.ToString() + " / " + levelXp.ToString() + " XP";
+        playerMenuTotalXpText.text = player.totalXp.ToString() + " XP";
     }
 
     void updateProgressBar()
     {
-        progressWidth = (float)currentXp / levelXp * progressMaxWidth;
+        progressWidth = (float)player.currentXp / levelXp * progressMaxWidth;
         Vector2 targetPosition = new Vector2(progressWidth, progressHeight);
         iTween.ValueTo(XpProgressBar.gameObject, iTween.Hash(
             "from", XpProgressBar.sizeDelta,
@@ -251,13 +244,13 @@ public class PlayerControllerScript : MonoBehaviour
             "oncomplete", "resetStarScale",
             "oncompletetarget", this.gameObject
         ));
-        level++;
-        lvlText.text = level.ToString();
-        playerMenuLvlText.text = level.ToString();
+        player.level++;
+        lvlText.text = player.level.ToString();
+        playerMenuLvlText.text = player.level.ToString();
         lvlFlash.SetActive(false);
         lvlFlash.SetActive(true);
-        UIManager.ShowNotification("LevelNotification", 10f, true, level.ToString(), "Til lukku!\nÞú hefur farið upp um stig.\nHeildar stigafjöldi: " + (totalXp + addXp).ToString() + " XP", levelUpNotificationStar);
-        if (level % newTitleLevels == 0)
+        UIManager.ShowNotification("LevelNotification", 10f, true, player.level.ToString(), "Til lukku!\nÞú hefur farið upp um stig.\nHeildar stigafjöldi: " + (player.totalXp + addXp).ToString() + " XP", levelUpNotificationStar);
+        if (player.level % newTitleLevels == 0)
         {
             updateTitle();
         }
@@ -273,14 +266,14 @@ public class PlayerControllerScript : MonoBehaviour
 
     void updatePlayerName(string value)
     {
-        playerName = value;
-        playerNameText.text = playerName;
-        if (initialNameChange)
+        player.playerName = value;
+        playerNameText.text = player.playerName;
+        if (player.initialNameChange)
         {
-            initialNameChange = false;
+            player.initialNameChange = false;
             addXpValue(800);
         }
-        if (playerName == "gulurbirkir")
+        if (player.playerName.ToLower() == "gulurbirkir")
         {
             itemController.findAllItems();
         }
@@ -288,60 +281,39 @@ public class PlayerControllerScript : MonoBehaviour
 
     void maleClicked()
     {
-        sex = "male";
+        player.sex = "male";
         maleImage.sprite = maleBtnActive;
         femaleImage.sprite = femaleBtnInactive;
-        playerTitle.text = titles[0, level / newTitleLevels];
-        if (initialSexChange)
+        playerTitle.text = titles[0, player.level / newTitleLevels];
+        if (player.initialSexChange)
         {
-            initialSexChange = false;
+            player.initialSexChange = false;
             addXpValue(300);
         }
+        updateTitle();
     }
 
     void femaleClicked()
     {
-        sex = "female";
+        player.sex = "female";
         femaleImage.sprite = femaleBtnActive;
         maleImage.sprite = maleBtnInactive;
-        playerTitle.text = titles[1, level / newTitleLevels];
-        if (initialSexChange)
+        playerTitle.text = titles[1, player.level / newTitleLevels];
+        if (player.initialSexChange)
         {
-            initialSexChange = false;
+            player.initialSexChange = false;
             addXpValue(300);
         }
+        updateTitle();
     }
 
     void updateTitle()
     {
-        if (sex == "female")
+        int sexIndex = (player.sex == "female") ? 1 : 0;
+        if (player.level / newTitleLevels < titles.GetLength(sexIndex))
         {
-            if (level / newTitleLevels < titles.GetLength(0))
-            {
-                playerTitle.text = titles[0, level / newTitleLevels];
-                UIManager.ShowNotification("TitleNotification", 0f, true, titles[0, level / newTitleLevels], titleText[level / newTitleLevels], titleMedal);
-            }
-        }
-        else
-        {
-            if (level / newTitleLevels < titles.GetLength(1))
-            {
-                playerTitle.text = titles[1, level / newTitleLevels];
-                UIManager.ShowNotification("TitleNotification", 0f, true, titles[1, level / newTitleLevels], titleText[level / newTitleLevels], titleMedal);
-            }
-        }
-    }
-
-    public void revealTitle()
-    {
-        if (initialPlayerMenuOpened)
-        {
-            initialPlayerMenuOpened = false;
-            if (level < 4)
-            {
-                UIManager.ShowNotification("TitleNotification", 0f, true, titles[0, level / newTitleLevels], titleText[level / newTitleLevels], titleMedal);
-            }
-            addXpValue(300);
+            playerTitle.text = titles[sexIndex, player.level / newTitleLevels];
+            UIManager.ShowNotification("TitleNotification", 0f, true, titles[sexIndex, player.level / newTitleLevels], titleText[sexIndex, player.level / newTitleLevels], titleMedal);
         }
     }
 }

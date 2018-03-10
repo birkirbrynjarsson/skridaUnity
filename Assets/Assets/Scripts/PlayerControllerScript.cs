@@ -98,10 +98,17 @@ public class PlayerControllerScript : MonoBehaviour
         playerNameInput.text = player.playerName;
         playerNameText.text = player.playerName;
         xpText.text = player.currentXp.ToString() + " / " + levelXp.ToString() + " XP";
-        playerTitle.text = titles[0, player.level / newTitleLevels];
         playerMenuLvlText.text = player.level.ToString();
         playerMenuXpText.text = player.currentXp.ToString() + " / " + levelXp.ToString() + " XP";
         playerMenuTotalXpText.text = player.totalXp.ToString() + " XP";
+
+        int sexIndex = (player.sex == "female") ? 1 : 0;
+        playerTitle.text = titles[sexIndex, player.level / newTitleLevels];
+        if(player.sex == "female") {
+            femaleImage.sprite = femaleBtnActive;
+        } else if(player.sex == "male") {
+            maleImage.sprite = maleBtnActive;
+        }
     }
 
     public void LoadPlayer()
@@ -131,13 +138,11 @@ public class PlayerControllerScript : MonoBehaviour
 		Debug.Log(this.player.sex);
 		Debug.Log(this.player.level);
 		Debug.Log(this.player.currentXp);
-        Initialize();
     }
 
     public void savePlayer()
     {
         string destination = Application.persistentDataPath + "/save.dat";
-        print(destination);
         FileStream file;
 
         if (File.Exists(destination))
@@ -316,7 +321,7 @@ public class PlayerControllerScript : MonoBehaviour
     void updateTitle()
     {
         int sexIndex = (player.sex == "female") ? 1 : 0;
-        if (player.level / newTitleLevels < titles.GetLength(sexIndex))
+        if (player.level / newTitleLevels < titles.GetLength(1))
         {
             playerTitle.text = titles[sexIndex, player.level / newTitleLevels];
             UIManager.ShowNotification("TitleNotification", 0f, true, titles[sexIndex, player.level / newTitleLevels], titleText[sexIndex, player.level / newTitleLevels], titleMedal);

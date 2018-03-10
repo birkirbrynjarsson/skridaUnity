@@ -12,7 +12,6 @@ public class PlayerControllerScript : MonoBehaviour
 
     GameData player;
     public DatabaseControllerScript database;
-    public static System.Random rand;
 
     public RectTransform XpProgressBar;
     private float progressWidth;
@@ -80,16 +79,29 @@ public class PlayerControllerScript : MonoBehaviour
     void Start()
     {
 		LoadPlayer();
+        Initialize();
         progressHeight = XpProgressBar.rect.height;
-        rand = new System.Random((int)System.DateTime.Now.Ticks & 0x0000FFFF);
-        addXpButton.onClick.AddListener(addXp);
+        //rand = new System.Random((int)System.DateTime.Now.Ticks & 0x0000FFFF);
+        //addXpButton.onClick.AddListener(addXp);
         playerNameInput.onValueChanged.AddListener(updatePlayerName);
         maleButton.onClick.AddListener(maleClicked);
         femaleButton.onClick.AddListener(femaleClicked);
 
-        lvlText.text = player.level.ToString();
 
         // Event listeners to gain XP
+    }
+
+    private void Initialize()
+    {
+        lvlText.text = player.level.ToString();
+        //addXpValue(0);
+        playerNameInput.text = player.playerName;
+        playerNameText.text = player.playerName;
+        xpText.text = player.currentXp.ToString() + " / " + levelXp.ToString() + " XP";
+        playerTitle.text = titles[0, player.level / newTitleLevels];
+        playerMenuLvlText.text = player.level.ToString();
+        playerMenuXpText.text = player.currentXp.ToString() + " / " + levelXp.ToString() + " XP";
+        playerMenuTotalXpText.text = player.totalXp.ToString() + " XP";
     }
 
     public void LoadPlayer()
@@ -103,13 +115,13 @@ public class PlayerControllerScript : MonoBehaviour
 			BinaryFormatter bf = new BinaryFormatter();
 			this.player = (GameData)bf.Deserialize(file);
 			if(this.player.playerId == null){
-				newPlayer();
+				this.player = new GameData();
 			}
 			file.Close();
         }
         else
         {
-            newPlayer();
+            this.player = new GameData();
         }
 
 		// load data into game properties
@@ -119,16 +131,13 @@ public class PlayerControllerScript : MonoBehaviour
 		Debug.Log(this.player.sex);
 		Debug.Log(this.player.level);
 		Debug.Log(this.player.currentXp);
-    }
-
-    private void newPlayer()
-    {
-        this.player = new GameData();
+        Initialize();
     }
 
     public void savePlayer()
     {
         string destination = Application.persistentDataPath + "/save.dat";
+        print(destination);
         FileStream file;
 
         if (File.Exists(destination))
@@ -143,18 +152,6 @@ public class PlayerControllerScript : MonoBehaviour
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(file, this.player);
         file.Close();
-    }
-
-    void addXp()
-    {
-        addXpValue(rand.Next(1000));
-        //		currentXp += rand.Next (1000);
-        //		while (currentXp > levelXp) {
-        //			goUpLevel ();
-        //			currentXp -= levelXp;
-        //		}
-        //		xpText.text = currentXp.ToString () + " / " + levelXp.ToString () + " XP";
-        //		updateProgressBar ();
     }
 
     public void addXpValue(int newXp)
@@ -212,6 +209,8 @@ public class PlayerControllerScript : MonoBehaviour
         }
         playerMenuXpText.text = player.currentXp.ToString() + " / " + levelXp.ToString() + " XP";
         playerMenuTotalXpText.text = player.totalXp.ToString() + " XP";
+
+        savePlayer();
     }
 
     void updateProgressBar()
@@ -254,6 +253,8 @@ public class PlayerControllerScript : MonoBehaviour
         {
             updateTitle();
         }
+        
+        savePlayer();
     }
 
     void resetStarScale()
@@ -277,6 +278,8 @@ public class PlayerControllerScript : MonoBehaviour
         {
             itemController.findAllItems();
         }
+        
+        savePlayer();
     }
 
     void maleClicked()
@@ -289,8 +292,10 @@ public class PlayerControllerScript : MonoBehaviour
         {
             player.initialSexChange = false;
             addXpValue(300);
+            
         }
         updateTitle();
+        savePlayer();
     }
 
     void femaleClicked()
@@ -305,6 +310,7 @@ public class PlayerControllerScript : MonoBehaviour
             addXpValue(300);
         }
         updateTitle();
+        savePlayer();
     }
 
     void updateTitle()

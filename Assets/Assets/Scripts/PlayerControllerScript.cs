@@ -131,13 +131,6 @@ public class PlayerControllerScript : MonoBehaviour
         {
             this.player = new GameData();
         }
-
-		// load data into game properties
-		// Debug.Log(this.player.playerId);
-		// Debug.Log(this.player.playerName);
-		// Debug.Log(this.player.sex);
-		// Debug.Log(this.player.level);
-		// Debug.Log(this.player.currentXp);
     }
 
     public void savePlayer()

@@ -44,12 +44,6 @@ namespace Skrida.Database {
 		public void SavePlayer(GameData playerData){
 			string json = JsonUtility.ToJson(playerData);
 			reference.Child("players").Child(playerData.playerId).SetRawJsonValueAsync(json);
-			Debug.Log(json);
-			Debug.Log(playerData.playerId);
-			Debug.Log(playerData.playerName);
-			Debug.Log(playerData.sex);
-			Debug.Log(playerData.level);
-			Debug.Log(playerData.currentXp);
 		}
 	}
 }

@@ -114,6 +114,7 @@ public class PlayerControllerScript : MonoBehaviour
     public void LoadPlayer()
     {
         string destination = Application.persistentDataPath + "/save.dat";
+        print(destination);
         FileStream file;
 
         if (File.Exists(destination))
@@ -132,17 +133,16 @@ public class PlayerControllerScript : MonoBehaviour
         }
 
 		// load data into game properties
-		Debug.Log(JsonUtility.ToJson(this.player));
-		Debug.Log(this.player.playerId);
-		Debug.Log(this.player.playerName);
-		Debug.Log(this.player.sex);
-		Debug.Log(this.player.level);
-		Debug.Log(this.player.currentXp);
+		// Debug.Log(this.player.playerId);
+		// Debug.Log(this.player.playerName);
+		// Debug.Log(this.player.sex);
+		// Debug.Log(this.player.level);
+		// Debug.Log(this.player.currentXp);
     }
 
     public void savePlayer()
     {
-        string destination = Application.persistentDataPath + "/save.dat";
+        string destination = Application.persistentDataPath + "/save.dat"; 
         FileStream file;
 
         if (File.Exists(destination))
@@ -157,6 +157,7 @@ public class PlayerControllerScript : MonoBehaviour
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(file, this.player);
         file.Close();
+        database.SavePlayer(this.player);
     }
 
     public void addXpValue(int newXp)

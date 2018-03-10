@@ -1,60 +1,66 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
 using DoozyUI;
+using Skrida.Database;
 
-public class PlayerControllerScript : MonoBehaviour {
+public class PlayerControllerScript : MonoBehaviour
+{
 
-	public static System.Random rand;
+    GameData player;
+    public DatabaseControllerScript database;
+    public static System.Random rand;
 
-	public RectTransform XpProgressBar;
-	private float progressWidth;
-	private float progressHeight;
-	public float progressMaxWidth;
+    public RectTransform XpProgressBar;
+    private float progressWidth;
+    private float progressHeight;
+    public float progressMaxWidth;
 
-	// Player Menu
-	public string playerName;
-	public Text playerNameText;
-	public InputField playerNameInput;
-	public Text playerTitle;
-	public Text playerMenuLvlText;
-	public Text playerMenuXpText;
-	public Text playerMenuTotalXpText;
+    // Player Menu
+    public string playerName;
+    public Text playerNameText;
+    public InputField playerNameInput;
+    public Text playerTitle;
+    public Text playerMenuLvlText;
+    public Text playerMenuXpText;
+    public Text playerMenuTotalXpText;
     public Sprite levelUpNotificationStar;
     public Sprite titleMedal;
     private bool initialNameChange = true;
     private bool initialSexChange = true;
     private bool initialPlayerMenuOpened = true;
 
-	public string sex;
-	public Button maleButton;
-	public Image maleImage;
-	public Sprite maleBtnInactive;
-	public Sprite maleBtnActive;
-	public Button femaleButton;
-	public Image femaleImage;
-	public Sprite femaleBtnInactive;
-	public Sprite femaleBtnActive;
+    public string sex;
+    public Button maleButton;
+    public Image maleImage;
+    public Sprite maleBtnInactive;
+    public Sprite maleBtnActive;
+    public Button femaleButton;
+    public Image femaleImage;
+    public Sprite femaleBtnInactive;
+    public Sprite femaleBtnActive;
 
 
-	// Common info
-	public int level;
-	public int totalXp;
-	public int currentXp;
-	public int levelXp;
+    // Common info
+    public int level;
+    public int totalXp;
+    public int currentXp;
+    public int levelXp;
     public int newTitleLevels;
 
-	// Player HUD
-	public Button addXpButton;
-	public GameObject lvlStar;
-	public GameObject lvlFlash;
-	public Text lvlText;
-	public Text xpText;
-	public GameObject XPFirework1;
+    // Player HUD
+    public Button addXpButton;
+    public GameObject lvlStar;
+    public GameObject lvlFlash;
+    public Text lvlText;
+    public Text xpText;
+    public GameObject XPFirework1;
 
-	// Item Controller, Cheats
-	public ItemControllerScript itemController;
+    // Item Controller, Cheats
+    public ItemControllerScript itemController;
 
     private string[,] titles = {
         {"Vinnumaður", "Nemandi", "Munkur", "Prestvígður Munkur", "Príor", "Ábóti", "Skálholtsbiskup"},
@@ -71,186 +77,269 @@ public class PlayerControllerScript : MonoBehaviour {
         "Skálholtsbiskup sest í helgan stein en ánefnir þig sem eftirmann sinn. Þú ert valdamesti þjónn kirkjunnar á Íslandi."
     };
 
-	// Use this for initialization
-	void Start () {
-		progressHeight = XpProgressBar.rect.height;
-		rand = new System.Random((int)System.DateTime.Now.Ticks & 0x0000FFFF);
-		addXpButton.onClick.AddListener (addXp);
-		playerNameInput.onValueChanged.AddListener (updatePlayerName);
-		maleButton.onClick.AddListener (maleClicked);
-		femaleButton.onClick.AddListener (femaleClicked);
+    // Use this for initialization
+    void Start()
+    {
+		LoadPlayer();
+        progressHeight = XpProgressBar.rect.height;
+        rand = new System.Random((int)System.DateTime.Now.Ticks & 0x0000FFFF);
+        addXpButton.onClick.AddListener(addXp);
+        playerNameInput.onValueChanged.AddListener(updatePlayerName);
+        maleButton.onClick.AddListener(maleClicked);
+        femaleButton.onClick.AddListener(femaleClicked);
 
-		lvlText.text = level.ToString ();
+        lvlText.text = level.ToString();
 
-		// Event listeners to gain XP
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        // Event listeners to gain XP
+    }
 
-	void addXp(){
-		addXpValue (rand.Next (1000));
-//		currentXp += rand.Next (1000);
-//		while (currentXp > levelXp) {
-//			goUpLevel ();
-//			currentXp -= levelXp;
-//		}
-//		xpText.text = currentXp.ToString () + " / " + levelXp.ToString () + " XP";
-//		updateProgressBar ();
-	}
+    // Update is called once per frame
+    void Update()
+    {
 
-	public void addXpValue(int newXp){
-		if (currentXp == 0) {
-			XpProgressBar.sizeDelta = new Vector2 (0f, progressHeight);
-			XpProgressBar.GetComponent<Image> ().color = new Color32(185,221,51,255);
-		}
-		if (currentXp + newXp >= levelXp) {
-			
-			totalXp += levelXp - currentXp;
-			currentXp += newXp;
-			newXp = currentXp - levelXp;
-			currentXp = 0;
+    }
 
-			XpProgressBar.GetComponent<Image> ().color = new Color32(255,223,0,255);
-			xpText.text = currentXp.ToString () + " / " + levelXp.ToString () + " XP";
+    public void LoadPlayer()
+    {
+        string destination = Application.persistentDataPath + "/save.dat";
+        FileStream file;
 
-			Vector2 targetPosition = new Vector2(progressMaxWidth, progressHeight);
-			iTween.ValueTo (XpProgressBar.gameObject, iTween.Hash(
-				"from", XpProgressBar.sizeDelta,
-				"to", targetPosition,
-				"time", 1f,
-				"onupdatetarget", this.gameObject, 
-				"onupdate", "moveGuiElement",
-				"oncomplete", "addXpValue",
-				"oncompletetarget", this.gameObject,
-				"oncompleteparams", newXp
-			));
-
-			goUpLevel (newXp);
-
-		} else {
-
-			totalXp += newXp;
-			currentXp += newXp;
-
-			xpText.text = currentXp.ToString () + " / " + levelXp.ToString () + " XP";
-			XPFirework1.SetActive (false);
-			XPFirework1.SetActive (true);
-
-			progressWidth = (float)currentXp / levelXp * progressMaxWidth;
-			Vector2 targetPosition = new Vector2(progressWidth, progressHeight);
-			iTween.ValueTo (XpProgressBar.gameObject, iTween.Hash(
-				"from", XpProgressBar.sizeDelta,
-				"to", targetPosition,
-				"time", 1f,
-				"onupdatetarget", this.gameObject, 
-				"onupdate", "moveGuiElement"
-			));
-		}
-		playerMenuXpText.text = currentXp.ToString () + " / " + levelXp.ToString () + " XP";
-		playerMenuTotalXpText.text = totalXp.ToString () + " XP";
-	}
-
-	void updateProgressBar(){
-		progressWidth = (float)currentXp / levelXp * progressMaxWidth;
-		Vector2 targetPosition = new Vector2(progressWidth, progressHeight);
-		iTween.ValueTo (XpProgressBar.gameObject, iTween.Hash(
-			"from", XpProgressBar.sizeDelta,
-			"to", targetPosition,
-			"time", 0.4f,
-			"onupdatetarget", this.gameObject, 
-			"onupdate", "moveGuiElement"
-		));
-
-		//XpProgressBar.sizeDelta = new Vector2 (progressWidth, progressHeight);
-	}
-
-	public void moveGuiElement(Vector2 position){
-		XpProgressBar.sizeDelta = position;
-	}
-
-	void goUpLevel(int addXp){
-		lvlStar.transform.localScale = new Vector3 (2.4f, 2.4f, 1f);
-		Vector3 scaleTo = new Vector3 (5f, 5f, 1f);
-		iTween.PunchScale (lvlStar, iTween.Hash(
-			"amount", scaleTo,
-			"time", 2f,
-			"oncomplete", "resetStarScale",
-			"oncompletetarget", this.gameObject
-		));
-		level++;
-		lvlText.text = level.ToString ();
-		playerMenuLvlText.text = level.ToString ();
-		lvlFlash.SetActive (false);
-		lvlFlash.SetActive (true);
-        UIManager.ShowNotification("LevelNotification", 10f, true, level.ToString(), "Til lukku!\nÞú hefur farið upp um stig.\nHeildar stigafjöldi: " + (totalXp + addXp).ToString() + " XP", levelUpNotificationStar);
-        if(level % newTitleLevels == 0){
-            updateTitle ();
+        if (File.Exists(destination))
+        {
+            file = File.OpenRead(destination);
+			BinaryFormatter bf = new BinaryFormatter();
+			this.player = (GameData)bf.Deserialize(file);
+			if(this.player.playerId == null){
+				newPlayer();
+			}
+			file.Close();
         }
-	}
+        else
+        {
+            newPlayer();
+        }
 
-	void resetStarScale(){
-		Vector3 rotateTo = new Vector3 (0f, 0f, 720f);	
-		iTween.PunchRotation (lvlStar, rotateTo, 1f);
-		Vector3 scaleTo = new Vector3 (1f,1f,1f);
-		iTween.ScaleTo (lvlStar, scaleTo, 1f);
-	}
+		// load data into game properties
+		Debug.Log(JsonUtility.ToJson(this.player));
+		Debug.Log(this.player.playerId);
+		Debug.Log(this.player.playerName);
+		Debug.Log(this.player.sex);
+		Debug.Log(this.player.level);
+		Debug.Log(this.player.currentXp);
+    }
 
-	void updatePlayerName(string value){
-		playerName = value;
-		playerNameText.text = playerName;
-        if(initialNameChange){
+    private void newPlayer()
+    {
+        this.player = new GameData();
+    }
+
+    public void savePlayer()
+    {
+        string destination = Application.persistentDataPath + "/save.dat";
+        FileStream file;
+
+        if (File.Exists(destination))
+        {
+            file = File.OpenWrite(destination);
+        }
+        else
+        {
+            file = File.Create(destination);
+        }
+
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(file, this.player);
+        file.Close();
+    }
+
+    void addXp()
+    {
+        addXpValue(rand.Next(1000));
+        //		currentXp += rand.Next (1000);
+        //		while (currentXp > levelXp) {
+        //			goUpLevel ();
+        //			currentXp -= levelXp;
+        //		}
+        //		xpText.text = currentXp.ToString () + " / " + levelXp.ToString () + " XP";
+        //		updateProgressBar ();
+    }
+
+    public void addXpValue(int newXp)
+    {
+        if (currentXp == 0)
+        {
+            XpProgressBar.sizeDelta = new Vector2(0f, progressHeight);
+            XpProgressBar.GetComponent<Image>().color = new Color32(185, 221, 51, 255);
+        }
+        if (currentXp + newXp >= levelXp)
+        {
+
+            totalXp += levelXp - currentXp;
+            currentXp += newXp;
+            newXp = currentXp - levelXp;
+            currentXp = 0;
+
+            XpProgressBar.GetComponent<Image>().color = new Color32(255, 223, 0, 255);
+            xpText.text = currentXp.ToString() + " / " + levelXp.ToString() + " XP";
+
+            Vector2 targetPosition = new Vector2(progressMaxWidth, progressHeight);
+            iTween.ValueTo(XpProgressBar.gameObject, iTween.Hash(
+                "from", XpProgressBar.sizeDelta,
+                "to", targetPosition,
+                "time", 1f,
+                "onupdatetarget", this.gameObject,
+                "onupdate", "moveGuiElement",
+                "oncomplete", "addXpValue",
+                "oncompletetarget", this.gameObject,
+                "oncompleteparams", newXp
+            ));
+
+            goUpLevel(newXp);
+
+        }
+        else
+        {
+
+            totalXp += newXp;
+            currentXp += newXp;
+
+            xpText.text = currentXp.ToString() + " / " + levelXp.ToString() + " XP";
+            XPFirework1.SetActive(false);
+            XPFirework1.SetActive(true);
+
+            progressWidth = (float)currentXp / levelXp * progressMaxWidth;
+            Vector2 targetPosition = new Vector2(progressWidth, progressHeight);
+            iTween.ValueTo(XpProgressBar.gameObject, iTween.Hash(
+                "from", XpProgressBar.sizeDelta,
+                "to", targetPosition,
+                "time", 1f,
+                "onupdatetarget", this.gameObject,
+                "onupdate", "moveGuiElement"
+            ));
+        }
+        playerMenuXpText.text = currentXp.ToString() + " / " + levelXp.ToString() + " XP";
+        playerMenuTotalXpText.text = totalXp.ToString() + " XP";
+    }
+
+    void updateProgressBar()
+    {
+        progressWidth = (float)currentXp / levelXp * progressMaxWidth;
+        Vector2 targetPosition = new Vector2(progressWidth, progressHeight);
+        iTween.ValueTo(XpProgressBar.gameObject, iTween.Hash(
+            "from", XpProgressBar.sizeDelta,
+            "to", targetPosition,
+            "time", 0.4f,
+            "onupdatetarget", this.gameObject,
+            "onupdate", "moveGuiElement"
+        ));
+
+        //XpProgressBar.sizeDelta = new Vector2 (progressWidth, progressHeight);
+    }
+
+    public void moveGuiElement(Vector2 position)
+    {
+        XpProgressBar.sizeDelta = position;
+    }
+
+    void goUpLevel(int addXp)
+    {
+        lvlStar.transform.localScale = new Vector3(2.4f, 2.4f, 1f);
+        Vector3 scaleTo = new Vector3(5f, 5f, 1f);
+        iTween.PunchScale(lvlStar, iTween.Hash(
+            "amount", scaleTo,
+            "time", 2f,
+            "oncomplete", "resetStarScale",
+            "oncompletetarget", this.gameObject
+        ));
+        level++;
+        lvlText.text = level.ToString();
+        playerMenuLvlText.text = level.ToString();
+        lvlFlash.SetActive(false);
+        lvlFlash.SetActive(true);
+        UIManager.ShowNotification("LevelNotification", 10f, true, level.ToString(), "Til lukku!\nÞú hefur farið upp um stig.\nHeildar stigafjöldi: " + (totalXp + addXp).ToString() + " XP", levelUpNotificationStar);
+        if (level % newTitleLevels == 0)
+        {
+            updateTitle();
+        }
+    }
+
+    void resetStarScale()
+    {
+        Vector3 rotateTo = new Vector3(0f, 0f, 720f);
+        iTween.PunchRotation(lvlStar, rotateTo, 1f);
+        Vector3 scaleTo = new Vector3(1f, 1f, 1f);
+        iTween.ScaleTo(lvlStar, scaleTo, 1f);
+    }
+
+    void updatePlayerName(string value)
+    {
+        playerName = value;
+        playerNameText.text = playerName;
+        if (initialNameChange)
+        {
             initialNameChange = false;
             addXpValue(800);
         }
-		if(playerName == "gulurbirkir"){
-			itemController.findAllItems();
-		}
-	}
+        if (playerName == "gulurbirkir")
+        {
+            itemController.findAllItems();
+        }
+    }
 
-	void maleClicked(){
-		sex = "male";
-		maleImage.sprite = maleBtnActive;
-		femaleImage.sprite = femaleBtnInactive;
-		playerTitle.text = titles[0, level/newTitleLevels];
-        if(initialSexChange){
+    void maleClicked()
+    {
+        sex = "male";
+        maleImage.sprite = maleBtnActive;
+        femaleImage.sprite = femaleBtnInactive;
+        playerTitle.text = titles[0, level / newTitleLevels];
+        if (initialSexChange)
+        {
             initialSexChange = false;
             addXpValue(300);
         }
-	}
+    }
 
-	void femaleClicked(){
-		sex = "female";
-		femaleImage.sprite = femaleBtnActive;
-		maleImage.sprite = maleBtnInactive;
-        playerTitle.text = titles[1, level/newTitleLevels];
-        if(initialSexChange){
+    void femaleClicked()
+    {
+        sex = "female";
+        femaleImage.sprite = femaleBtnActive;
+        maleImage.sprite = maleBtnInactive;
+        playerTitle.text = titles[1, level / newTitleLevels];
+        if (initialSexChange)
+        {
             initialSexChange = false;
             addXpValue(300);
         }
-	}
+    }
 
-	void updateTitle(){
-		if (sex == "female") {
-            if(level/newTitleLevels < titles.GetLength(0)){
-                playerTitle.text = titles[0, level/newTitleLevels];
-                UIManager.ShowNotification("TitleNotification", 0f, true, titles[0, level/newTitleLevels], titleText[level/newTitleLevels], titleMedal);
+    void updateTitle()
+    {
+        if (sex == "female")
+        {
+            if (level / newTitleLevels < titles.GetLength(0))
+            {
+                playerTitle.text = titles[0, level / newTitleLevels];
+                UIManager.ShowNotification("TitleNotification", 0f, true, titles[0, level / newTitleLevels], titleText[level / newTitleLevels], titleMedal);
             }
-		} else {
-            if(level/newTitleLevels < titles.GetLength(1)){
-                playerTitle.text = titles[1, level/newTitleLevels];
-                UIManager.ShowNotification("TitleNotification", 0f, true, titles[1, level/newTitleLevels], titleText[level/newTitleLevels], titleMedal);
+        }
+        else
+        {
+            if (level / newTitleLevels < titles.GetLength(1))
+            {
+                playerTitle.text = titles[1, level / newTitleLevels];
+                UIManager.ShowNotification("TitleNotification", 0f, true, titles[1, level / newTitleLevels], titleText[level / newTitleLevels], titleMedal);
             }
-		}
-	}
+        }
+    }
 
-    public void revealTitle(){
-        if(initialPlayerMenuOpened){
+    public void revealTitle()
+    {
+        if (initialPlayerMenuOpened)
+        {
             initialPlayerMenuOpened = false;
-            if(level < 4){
-                UIManager.ShowNotification("TitleNotification", 0f, true, titles[0, level/newTitleLevels], titleText[level/newTitleLevels], titleMedal);
+            if (level < 4)
+            {
+                UIManager.ShowNotification("TitleNotification", 0f, true, titles[0, level / newTitleLevels], titleText[level / newTitleLevels], titleMedal);
             }
             addXpValue(300);
         }

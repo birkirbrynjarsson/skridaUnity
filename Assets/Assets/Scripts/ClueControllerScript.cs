@@ -70,12 +70,16 @@ public class ClueControllerScript : MonoBehaviour {
 		rand = new System.Random((int)System.DateTime.Now.Ticks & 0x0000FFFF);
 		addClueButton.onClick.AddListener (spawnRandomClue);
 		ScrollTrackableScript.onMessagePickup += receiveMessage;
-		zeroNotification();
 		StartCoroutine(InitClues());
 	}
 
-	IEnumerator InitClues(){
-		yield return new WaitForSeconds(1);
+	public IEnumerator InitClues(){
+		foreach(var clue in receivedClues){
+			Destroy(clue);
+		}
+		receivedClues = new List<GameObject>();
+		zeroNotification();
+		yield return new WaitForSeconds(0.2f);
 		if(playerController.player.foundMessages.Count == 0){
 			playerController.player.foundMessages.Add(new FoundMessage(5, false, System.DateTime.Now));
 			playerController.player.foundMessages.Add(new FoundMessage(4, false, System.DateTime.Now));

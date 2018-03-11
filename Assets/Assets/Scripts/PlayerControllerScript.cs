@@ -11,6 +11,7 @@ public class PlayerControllerScript : MonoBehaviour
 {
 
     public GameData player;
+    public Button restartButton;
     public DatabaseControllerScript database;
 
     public RectTransform XpProgressBar;
@@ -87,6 +88,7 @@ public class PlayerControllerScript : MonoBehaviour
         playerNameInput.onValueChanged.AddListener(updatePlayerName);
         maleButton.onClick.AddListener(maleClicked);
         femaleButton.onClick.AddListener(femaleClicked);
+        restartButton.onClick.AddListener(restartClicked);
 
 
         // Event listeners to gain XP
@@ -104,12 +106,28 @@ public class PlayerControllerScript : MonoBehaviour
         playerMenuTotalXpText.text = player.totalXp.ToString() + " XP";
 
         int sexIndex = (player.sex == "female") ? 1 : 0;
-        playerTitle.text = titles[sexIndex, player.level / newTitleLevels];
+        playerTitle.text = titles[1, player.level / newTitleLevels];
         if(player.sex == "female") {
             femaleImage.sprite = femaleBtnActive;
+            maleImage.sprite = maleBtnInactive;
         } else if(player.sex == "male") {
             maleImage.sprite = maleBtnActive;
+            femaleImage.sprite = femaleBtnActive;
+        } else {
+            maleImage.sprite = maleBtnInactive;
+            femaleImage.sprite = femaleBtnInactive;
         }
+    }
+
+    void restartClicked(){
+        newPlayer();
+        Initialize();
+        StartCoroutine(clueController.InitClues());
+    }
+
+    void newPlayer(){
+        this.player = new GameData();
+        savePlayer();
     }
 
     public void LoadPlayer()

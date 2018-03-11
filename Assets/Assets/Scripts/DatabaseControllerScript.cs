@@ -43,7 +43,11 @@ namespace Skrida.Database {
 
 		public void SavePlayer(GameData playerData){
 			string json = JsonUtility.ToJson(playerData);
-			reference.Child("players").Child(playerData.playerId).SetRawJsonValueAsync(json);
+			reference.Child("players").Child(playerData.playerId).SetRawJsonValueAsync(json).ContinueWith(t => {
+				if(t.IsCompleted) {
+					reference.Child("players").Child(playerData.playerId).UpdateChildrenAsync(new Dictionary<string, object> {{"timeOfLastUpdate", ServerValue.Timestamp}});
+				}
+			});
 		}
 	}
 }

@@ -23,7 +23,7 @@ public class GameData
     {
         this.playerId = Guid.NewGuid().ToString();
         playerName = "";
-        sex = "female";
+        sex = "";
         level = 1;
         totalXp = 0;
         currentXp = 0;

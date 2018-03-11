@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class GameData
 {
+    private static int TOTAL_TREASURES = 9;
     public string playerId;
     public string playerName;
     public string sex;
@@ -15,7 +16,7 @@ public class GameData
     public bool initialNameChange;
     public bool initialSexChange;
     public List<FoundMessage> foundMessages;
-    // public List<Tuple<int, System.DateTime>> messages;
+    public List<FoundTreasure> foundTreasures;
     public int totalCluesFound;
     public int totalTreasuresFound;
 
@@ -30,6 +31,11 @@ public class GameData
         initialNameChange = true;
         initialSexChange = true;
         foundMessages = new List<FoundMessage>();
+        foundTreasures = new List<FoundTreasure>();
+        for (int i = 0; i < TOTAL_TREASURES; i++)
+        {
+            foundTreasures.Add(new FoundTreasure(i, -1));
+        }
     }
 }
 
@@ -44,5 +50,21 @@ public class FoundMessage
         messageId = nr;
         this.opened = opened;
         this.time = time;
+    }
+}
+
+[System.Serializable]
+public class FoundTreasure
+{
+    public int treasureId;
+    public int level;
+    public FoundTreasure(int id, int level)
+    {
+        treasureId = id;
+        this.level = level;
+        if (level < -1 || level > 3)
+        {
+            this.level = -1;
+        }
     }
 }

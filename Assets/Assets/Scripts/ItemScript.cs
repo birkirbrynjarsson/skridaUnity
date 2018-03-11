@@ -38,6 +38,10 @@ public class ItemScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		InitItem();
+	}
+
+	public void InitItem(){
 		isFound = false;
 		currentLevel = 0;
 		backgroundImage.enabled = true;
@@ -53,14 +57,11 @@ public class ItemScript : MonoBehaviour {
 		openItemButton.onClick.AddListener (openItem);
 		openItemScript = GameObject.Find("OpenItem").GetComponent<OpenItemScript>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-	public void itemFound(){
-		UIManager.ShowNotification("ItemNotification", 10f, true, "Fjársjóðsfundur!", itemName, item0);
+	public void itemFound(bool showNotification = true){
+		if(showNotification){
+			UIManager.ShowNotification("ItemNotification", 10f, true, "Fjársjóðsfundur!", itemName, item0);
+		}
 		isFound = true;
 		lockImage.enabled = false;
 		backgroundImage.sprite = backgroundOpen;
@@ -69,15 +70,16 @@ public class ItemScript : MonoBehaviour {
 		starSlot3.enabled = true;
 		itemImage.enabled = true;
 		itemImage.sprite = item0;
+		currentLevel = 0;
 
 		System.DateTime receivedTime = System.DateTime.Now;
 		string minute = receivedTime.Minute < 10 ? "0" + receivedTime.Minute.ToString () : receivedTime.Minute.ToString ();
 		date = receivedTime.Hour.ToString () + ":" + minute + ", " + receivedTime.Day.ToString() + "/" + receivedTime.Month.ToString();
 	}
 
-	public void levelUp(){
+	public void levelUp(bool showNotification = true){
 		if (!isFound) {
-			itemFound ();
+			itemFound (showNotification);
 		} else {
 			currentLevel++;
 			switch (currentLevel) {
@@ -94,6 +96,12 @@ public class ItemScript : MonoBehaviour {
 				currentLevel = 3;
 				break;
 			}
+		}
+	}
+
+	public void setLevel(int level){
+		while(currentLevel < level && level < 4){
+			levelUp(false);
 		}
 	}
 

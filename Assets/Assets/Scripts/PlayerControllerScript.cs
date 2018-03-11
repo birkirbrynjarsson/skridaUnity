@@ -123,6 +123,7 @@ public class PlayerControllerScript : MonoBehaviour
         newPlayer();
         Initialize();
         StartCoroutine(clueController.InitClues());
+        StartCoroutine(itemController.loadFoundTreasures());
     }
 
     void newPlayer(){

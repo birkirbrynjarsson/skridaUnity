@@ -24,7 +24,8 @@ public class messageScript : MonoBehaviour {
 	public Sprite sSprite;
 	public PlayerControllerScript playerScript;
 	public ClueControllerScript clueScript;
-	private Message message;
+	public Message message;
+	public FoundMessage foundMessage; 
 
 
 	// Use this for initialization
@@ -41,9 +42,9 @@ public class messageScript : MonoBehaviour {
 
 	void openMessage(){
 		openScript.updateClue (sTitle, sDate, sLocation, sContent, sSprite);
-		if (!opened) {
+		if (!this.foundMessage.opened) {
 			playerScript.addXpValue (135);
-			opened = true;
+			this.foundMessage.opened = true;
 			scrollImage.GetComponent<Image> ().overrideSprite = openScroll;
 			clueScript.updateNotification (-1);
 			playerScript.player.foundMessages.Find(x => x.messageId == message.messageId).opened = true;
@@ -56,6 +57,7 @@ public class messageScript : MonoBehaviour {
 			UIManager.ShowNotification("MessageNotification", 3f, true, "Ný Vísbending!", message.title, closedScroll);
 		}
 		this.message = message;
+		this.foundMessage = foundMessage;
 		sTitle = message.title;
 		receivedTime = foundMessage.time;
 		string minute = this.receivedTime.Minute < 10 ? "0" + this.receivedTime.Minute.ToString () : this.receivedTime.Minute.ToString ();

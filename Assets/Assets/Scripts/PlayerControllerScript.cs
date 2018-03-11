@@ -10,7 +10,7 @@ using Skrida.Database;
 public class PlayerControllerScript : MonoBehaviour
 {
 
-    GameData player;
+    public GameData player;
     public DatabaseControllerScript database;
 
     public RectTransform XpProgressBar;
@@ -52,6 +52,7 @@ public class PlayerControllerScript : MonoBehaviour
 
     // Item Controller, Cheats
     public ItemControllerScript itemController;
+    public ClueControllerScript clueController;
 
     private string[,] titles = {
         {"Vinnumaður", "Nemandi", "Munkur", "Prestvígður Munkur", "Príor", "Ábóti", "Skálholtsbiskup"},
@@ -114,7 +115,6 @@ public class PlayerControllerScript : MonoBehaviour
     public void LoadPlayer()
     {
         string destination = Application.persistentDataPath + "/save.dat";
-        print(destination);
         FileStream file;
 
         if (File.Exists(destination))

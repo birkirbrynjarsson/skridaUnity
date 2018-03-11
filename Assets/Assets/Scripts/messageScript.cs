@@ -24,6 +24,7 @@ public class messageScript : MonoBehaviour {
 	public Sprite sSprite;
 	public PlayerControllerScript playerScript;
 	public ClueControllerScript clueScript;
+	private Message message;
 
 
 	// Use this for initialization
@@ -45,20 +46,27 @@ public class messageScript : MonoBehaviour {
 			opened = true;
 			scrollImage.GetComponent<Image> ().overrideSprite = openScroll;
 			clueScript.updateNotification (-1);
+			playerScript.player.foundMessages.Find(x => x.messageId == message.messageId).opened = true;
+			playerScript.savePlayer();
 		}
 	}
 
-	public void init(string title, string location, string content, Sprite image, bool notification = true){
+	public void init(Message message, FoundMessage foundMessage, Sprite image, bool notification = true){
 		if (notification) {
-			UIManager.ShowNotification("MessageNotification", 3f, true, "Ný Vísbending!", title, closedScroll);
+			UIManager.ShowNotification("MessageNotification", 3f, true, "Ný Vísbending!", message.title, closedScroll);
 		}
-		receivedTime = System.DateTime.Now;
-		sTitle = title;
+		this.message = message;
+		sTitle = message.title;
+		receivedTime = foundMessage.time;
 		string minute = this.receivedTime.Minute < 10 ? "0" + this.receivedTime.Minute.ToString () : this.receivedTime.Minute.ToString ();
 		sDate = receivedTime.Hour.ToString () + ":" + minute + ", " + this.receivedTime.Day.ToString() + "/" + this.receivedTime.Month.ToString();
-		sLocation = location;
-		sContent = content;
+		sLocation = message.location;
+		sContent = message.content;
 		sSprite = image;
+		this.opened = foundMessage.opened;
+		if(this.opened){
+			scrollImage.GetComponent<Image> ().overrideSprite = openScroll;
+		}
 		this.title.text = sTitle;
 		this.content.text = sContent;
 		this.date.text = sDate;

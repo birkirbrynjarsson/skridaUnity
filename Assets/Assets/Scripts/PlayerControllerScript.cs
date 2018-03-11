@@ -112,7 +112,7 @@ public class PlayerControllerScript : MonoBehaviour
             maleImage.sprite = maleBtnInactive;
         } else if(player.sex == "male") {
             maleImage.sprite = maleBtnActive;
-            femaleImage.sprite = femaleBtnActive;
+            femaleImage.sprite = femaleBtnInactive;
         } else {
             maleImage.sprite = maleBtnInactive;
             femaleImage.sprite = femaleBtnInactive;

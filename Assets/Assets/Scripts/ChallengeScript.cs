@@ -407,7 +407,7 @@ public class ChallengeScript : MonoBehaviour {
     }
 
     void correctAnswer(string correctAnswer) {
-        UIManager.ShowNotification("MessageNotification", 10f, true, "Vel gert!", "\"" + correctAnswer + "\"\n er rétt svar", completedImage);
+        UIManager.ShowNotification("MessageNotification", -1, true, "Vel gert!", "\"" + correctAnswer + "\"\n er rétt svar", completedImage);
         if(challengeNr == itemLevel){
             itemController.updateItem(itemIndex);
             openItem.levelUpItem();
@@ -416,7 +416,7 @@ public class ChallengeScript : MonoBehaviour {
     }
 
     void wrongAnswer(){
-        UIManager.ShowNotification("NoStarNotification", 10f, true, "Því miður", "rangt svar!\nreyndu aftur!", incompleteImage);
+        UIManager.ShowNotification("NoStarNotification", -1, true, "Því miður", "rangt svar!\nreyndu aftur!", incompleteImage);
     }
 
     /// <summary>

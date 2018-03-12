@@ -15,6 +15,7 @@ public class ItemScript : MonoBehaviour {
 
 	public Button openItemButton;
 	public Image backgroundImage;
+	public Sprite backgroundClosed;
 	public Sprite backgroundOpen;
 	public Image lockImage;
 	public Image itemImage;
@@ -45,6 +46,7 @@ public class ItemScript : MonoBehaviour {
 		isFound = false;
 		currentLevel = 0;
 		backgroundImage.enabled = true;
+		backgroundImage.sprite = backgroundClosed;
 		lockImage.enabled = true;
 		itemImage.enabled = false;
 		starSlot1.enabled = false;
@@ -54,13 +56,14 @@ public class ItemScript : MonoBehaviour {
 		star2.enabled = false;
 		star3.enabled = false;
 
+
 		openItemButton.onClick.AddListener (openItem);
 		openItemScript = GameObject.Find("OpenItem").GetComponent<OpenItemScript>();
 	}
 
 	public void itemFound(bool showNotification = true){
 		if(showNotification){
-			UIManager.ShowNotification("ItemNotification", 10f, true, "Fjársjóðsfundur!", itemName, item0);
+			UIManager.ShowNotification("ItemNotification", -1, true, "Fjársjóðsfundur!", itemName, item0);
 		}
 		isFound = true;
 		lockImage.enabled = false;
@@ -72,7 +75,12 @@ public class ItemScript : MonoBehaviour {
 		itemImage.sprite = item0;
 		currentLevel = 0;
 
-		System.DateTime receivedTime = System.DateTime.Now;
+		if(date == null){
+			setItemDate(System.DateTime.Now);
+		}
+	}
+
+	public void setItemDate(System.DateTime receivedTime){
 		string minute = receivedTime.Minute < 10 ? "0" + receivedTime.Minute.ToString () : receivedTime.Minute.ToString ();
 		date = receivedTime.Hour.ToString () + ":" + minute + ", " + receivedTime.Day.ToString() + "/" + receivedTime.Month.ToString();
 	}

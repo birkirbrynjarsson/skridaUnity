@@ -54,7 +54,7 @@ public class messageScript : MonoBehaviour {
 
 	public void init(Message message, FoundMessage foundMessage, Sprite image, bool notification = true){
 		if (notification) {
-			UIManager.ShowNotification("MessageNotification", 3f, true, "Ný Vísbending!", message.title, closedScroll);
+			UIManager.ShowNotification("MessageNotification", -1, true, "Ný Vísbending!", message.title, closedScroll);
 		}
 		this.message = message;
 		this.foundMessage = foundMessage;

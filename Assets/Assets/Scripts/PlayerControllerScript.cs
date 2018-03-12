@@ -54,6 +54,9 @@ public class PlayerControllerScript : MonoBehaviour
     // Item Controller, Cheats
     public ItemControllerScript itemController;
     public ClueControllerScript clueController;
+    private AudioSource audioSource;
+    public AudioClip xpSound;
+    public AudioClip[] writingSounds;
 
     private string[,] titles = {
         {"Vinnumaður", "Nemandi", "Munkur", "Prestvígður Munkur", "Príor", "Ábóti", "Skálholtsbiskup"},
@@ -85,10 +88,12 @@ public class PlayerControllerScript : MonoBehaviour
         progressHeight = XpProgressBar.rect.height;
         //rand = new System.Random((int)System.DateTime.Now.Ticks & 0x0000FFFF);
         //addXpButton.onClick.AddListener(addXp);
-        playerNameInput.onValueChanged.AddListener(updatePlayerName);
+        playerNameInput.onEndEdit.AddListener(updatePlayerName);
+        playerNameInput.onValueChanged.AddListener(writing);
         maleButton.onClick.AddListener(maleClicked);
         femaleButton.onClick.AddListener(femaleClicked);
         restartButton.onClick.AddListener(restartClicked);
+        audioSource = gameObject.GetComponent<AudioSource>();
 
 
         // Event listeners to gain XP
@@ -105,8 +110,9 @@ public class PlayerControllerScript : MonoBehaviour
         playerMenuXpText.text = player.currentXp.ToString() + " / " + levelXp.ToString() + " XP";
         playerMenuTotalXpText.text = player.totalXp.ToString() + " XP";
 
-        int sexIndex = (player.sex == "female") ? 1 : 0;
-        playerTitle.text = titles[1, player.level / newTitleLevels];
+        int sexIndex = 1;
+        int titleIndex = (player.level / newTitleLevels >= titles.GetLength(sexIndex)) ? titles.GetLength(sexIndex) - 1 : player.level / newTitleLevels;
+        playerTitle.text = titles[sexIndex, titleIndex];
         if(player.sex == "female") {
             femaleImage.sprite = femaleBtnActive;
             maleImage.sprite = maleBtnInactive;
@@ -174,6 +180,7 @@ public class PlayerControllerScript : MonoBehaviour
 
     public void addXpValue(int newXp)
     {
+        audioSource.PlayOneShot(xpSound);
         if (player.currentXp == 0)
         {
             XpProgressBar.sizeDelta = new Vector2(0f, progressHeight);
@@ -266,7 +273,7 @@ public class PlayerControllerScript : MonoBehaviour
         playerMenuLvlText.text = player.level.ToString();
         lvlFlash.SetActive(false);
         lvlFlash.SetActive(true);
-        UIManager.ShowNotification("LevelNotification", 10f, true, player.level.ToString(), "Til lukku!\nÞú hefur farið upp um stig.\nHeildar stigafjöldi: " + (player.totalXp + addXp).ToString() + " XP", levelUpNotificationStar);
+        UIManager.ShowNotification("LevelNotification", -1, true, player.level.ToString(), "Til lukku!\nÞú hefur farið upp um stig.\nHeildar stigafjöldi: " + (player.totalXp + addXp).ToString() + " XP", levelUpNotificationStar);
         if (player.level % newTitleLevels == 0)
         {
             updateTitle();
@@ -283,8 +290,9 @@ public class PlayerControllerScript : MonoBehaviour
         iTween.ScaleTo(lvlStar, scaleTo, 1f);
     }
 
-    void updatePlayerName(string value)
+    public void updatePlayerName(string value)
     {
+        if(value == "") return;
         player.playerName = value;
         playerNameText.text = player.playerName;
         if (player.initialNameChange)
@@ -299,13 +307,17 @@ public class PlayerControllerScript : MonoBehaviour
         
         savePlayer();
     }
+    public void writing(string input){
+        audioSource.PlayOneShot(writingSounds[Random.Range(0,writingSounds.GetLength(0) - 1)]);
+    }
 
     void maleClicked()
     {
         player.sex = "male";
         maleImage.sprite = maleBtnActive;
         femaleImage.sprite = femaleBtnInactive;
-        playerTitle.text = titles[0, player.level / newTitleLevels];
+        int titleIndex = (player.level / newTitleLevels >= titles.GetLength(0)) ? titles.GetLength(0) - 1 : player.level / newTitleLevels;
+        playerTitle.text = titles[0, titleIndex];
         if (player.initialSexChange)
         {
             player.initialSexChange = false;
@@ -321,7 +333,8 @@ public class PlayerControllerScript : MonoBehaviour
         player.sex = "female";
         femaleImage.sprite = femaleBtnActive;
         maleImage.sprite = maleBtnInactive;
-        playerTitle.text = titles[1, player.level / newTitleLevels];
+        int titleIndex = (player.level / newTitleLevels >= titles.GetLength(1)) ? titles.GetLength(1) - 1 : player.level / newTitleLevels;
+        playerTitle.text = titles[1, titleIndex];
         if (player.initialSexChange)
         {
             player.initialSexChange = false;
@@ -334,10 +347,9 @@ public class PlayerControllerScript : MonoBehaviour
     void updateTitle()
     {
         int sexIndex = (player.sex == "female") ? 1 : 0;
-        if (player.level / newTitleLevels < titles.GetLength(1))
-        {
-            playerTitle.text = titles[sexIndex, player.level / newTitleLevels];
-            UIManager.ShowNotification("TitleNotification", 0f, true, titles[sexIndex, player.level / newTitleLevels], titleText[sexIndex, player.level / newTitleLevels], titleMedal);
-        }
+        int titleIndex = (player.level / newTitleLevels >= titles.GetLength(sexIndex)) ? titles.GetLength(sexIndex) - 1 : player.level / newTitleLevels;
+        playerTitle.text = titles[sexIndex, titleIndex];
+        UIManager.ShowNotification("TitleNotification", -1, true, titles[sexIndex, player.level / newTitleLevels], titleText[sexIndex, player.level / newTitleLevels], titleMedal);
+
     }
 }

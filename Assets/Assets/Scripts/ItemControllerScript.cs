@@ -41,16 +41,23 @@ public class ItemControllerScript : MonoBehaviour
 			if(treasure.level >= 0){
 				items[treasure.treasureId].itemFound(false);
 				items[treasure.treasureId].setLevel(treasure.level);
+				items[treasure.treasureId].setItemDate(treasure.time);
 			}
 		}
 		setCount();
     }
     void findItem(int itemNr)
     {
+		if(playerScript.player.foundTreasures.Find(x => x.treasureId == itemNr).level >= 0){
+			return;
+		}
         if (-1 < itemNr && itemNr < items.Count)
         {
-			playerScript.player.foundTreasures.Find(x => x.treasureId == itemNr).level = 0;
+			var treasure = playerScript.player.foundTreasures.Find(x => x.treasureId == itemNr);
+			treasure.level = 0;
+			treasure.time = System.DateTime.Now;
             items[itemNr].levelUp();
+			items[itemNr].setItemDate(treasure.time);
             playerScript.addXpValue(850);
         }
         else

@@ -21,24 +21,27 @@ namespace Skrida.Database {
 
 
 			// TESTING FIREBASE STUFF
-			FirebaseDatabase.DefaultInstance
-			.GetReference("challenges")
-			.GetValueAsync().ContinueWith(task => {
-				if (task.IsFaulted) {
-					// Handle the error...
-					Debug.Log("Failed to get challenges information from Firebase");
-				}
-				else if (task.IsCompleted) {
-					// List of all challenges
-					// Each entry is an IDictionary with keys "question" and "answers"
-					challenges = (IList)task.Result.Value;				
-				}
-			});
+			challenges = new List<Object>();
+			StartCoroutine(GetChallenges());
 		}
 		
-		// Update is called once per frame
-		void Update () {
-			
+		public IEnumerator GetChallenges(){
+			while(challenges.Count == 0){
+				FirebaseDatabase.DefaultInstance
+				.GetReference("challenges")
+				.GetValueAsync().ContinueWith(task => {
+					if (task.IsFaulted) {
+						// Handle the error...
+						Debug.Log("Failed to get challenges information from Firebase");
+					}
+					else if (task.IsCompleted) {
+						// List of all challenges
+						// Each entry is an IDictionary with keys "question" and "answers"
+						challenges = (IList)task.Result.Value;				
+					}
+				});
+				yield return new WaitForSeconds(5f);
+			}
 		}
 
 		public void SavePlayer(GameData playerData){

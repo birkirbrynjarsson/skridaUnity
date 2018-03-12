@@ -58,6 +58,7 @@ public class FoundTreasure
 {
     public int treasureId;
     public int level;
+    public System.DateTime time;
     public FoundTreasure(int id, int level)
     {
         treasureId = id;
@@ -66,5 +67,6 @@ public class FoundTreasure
         {
             this.level = -1;
         }
+        time = System.DateTime.Now;
     }
 }

@@ -119,6 +119,7 @@ public class PlayerControllerScript : MonoBehaviour
         } else if(player.sex == "male") {
             maleImage.sprite = maleBtnActive;
             femaleImage.sprite = femaleBtnInactive;
+            playerTitle.text = titles[0, titleIndex];
         } else {
             maleImage.sprite = maleBtnInactive;
             femaleImage.sprite = femaleBtnInactive;
@@ -316,7 +317,7 @@ public class PlayerControllerScript : MonoBehaviour
         player.sex = "male";
         maleImage.sprite = maleBtnActive;
         femaleImage.sprite = femaleBtnInactive;
-        int titleIndex = (player.level / newTitleLevels >= titles.GetLength(0)) ? titles.GetLength(0) - 1 : player.level / newTitleLevels;
+        int titleIndex = (player.level / newTitleLevels >= titles.GetLength(1)) ? titles.GetLength(1) - 1 : player.level / newTitleLevels;
         playerTitle.text = titles[0, titleIndex];
         if (player.initialSexChange)
         {
@@ -347,7 +348,7 @@ public class PlayerControllerScript : MonoBehaviour
     void updateTitle()
     {
         int sexIndex = (player.sex == "female") ? 1 : 0;
-        int titleIndex = (player.level / newTitleLevels >= titles.GetLength(sexIndex)) ? titles.GetLength(sexIndex) - 1 : player.level / newTitleLevels;
+        int titleIndex = (player.level / newTitleLevels >= titles.GetLength(1)) ? titles.GetLength(1) - 1 : player.level / newTitleLevels;
         playerTitle.text = titles[sexIndex, titleIndex];
         UIManager.ShowNotification("TitleNotification", -1, true, titles[sexIndex, player.level / newTitleLevels], titleText[sexIndex, player.level / newTitleLevels], titleMedal);
 

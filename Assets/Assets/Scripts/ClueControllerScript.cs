@@ -33,7 +33,7 @@ public class ClueControllerScript : MonoBehaviour {
 			messageId = 1,
 			title = "Velkomin í fjársjóðsleik",
 			location = "Leiðbeiningar",
-			content = "\"Fjársjóðirnir á Skriðu\" er leikur þar sem markmiðið er að finna falda fjársjóði á Skriðuklaustri.\n\nFjársjóðirnir eru munir sem fundust við fornleifauppgröftinn á miðaldarklaustrinu hér á túninu fyrir neðan Gunnarsshús.\n\nEf þú heldur að þú ráðir við áskorunina og hyggst verða leiðtogi reglubræðra eða reglusystra í klaustrinu að Skriðu, þá þarftu að:\n\n- Finna allar vísbendingarnar\n- Finna alla fjársjóðina\n- Leysa allar þrautirnar\n\nGangi þér vel!",
+			content = "\"Fjársjóðir Skriðuklausturs\" er leikur þar sem markmiðið er að finna falda fjársjóði á Skriðuklaustri.\n\nFjársjóðirnir eru munir sem fundust við fornleifauppgröftinn á miðaldarklaustrinu hér á túninu fyrir neðan Gunnarsshús.\n\nEf þú heldur að þú ráðir við áskorunina og hyggst verða leiðtogi reglubræðra eða reglusystra í klaustrinu að Skriðu, þá þarftu að:\n\n- Finna allar vísbendingarnar\n- Finna alla fjársjóðina\n- Leysa allar þrautirnar\n\nGangi þér vel!",
 		},
 		new Message(){
 			messageId = 2,

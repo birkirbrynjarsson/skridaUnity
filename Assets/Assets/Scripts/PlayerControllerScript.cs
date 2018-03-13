@@ -11,7 +11,6 @@ public class PlayerControllerScript : MonoBehaviour
 {
 
     public GameData player;
-    public Button restartButton;
     public DatabaseControllerScript database;
 
     public RectTransform XpProgressBar;
@@ -92,7 +91,6 @@ public class PlayerControllerScript : MonoBehaviour
         playerNameInput.onValueChanged.AddListener(writing);
         maleButton.onClick.AddListener(maleClicked);
         femaleButton.onClick.AddListener(femaleClicked);
-        restartButton.onClick.AddListener(restartClicked);
         audioSource = gameObject.GetComponent<AudioSource>();
 
 
@@ -126,7 +124,10 @@ public class PlayerControllerScript : MonoBehaviour
         }
     }
 
-    void restartClicked(){
+    public void promptRestart(){
+        UIManager.ShowNotification("PromptRestartNotification", -1, true, "Byrja upp nýtt?", "Ertu viss um að þú viljir byrja leikinn upp á nýtt með enga fjársjóði?\n\nATH: Þessi aðgerð er\nÓAFTURKRÆF!", null);
+    }
+    public void restartGame(){
         newPlayer();
         Initialize();
         StartCoroutine(clueController.InitClues());

@@ -70,3 +70,46 @@ public class FoundTreasure
         time = System.DateTime.Now;
     }
 }
+
+[System.Serializable]
+public class Message {
+	public int messageId;
+	public string title;
+	public string location;
+	public string content;
+	public string spritePath;
+    public Message(int id){
+		messageId = id;
+        title = "";
+        location = "";
+        content = "";
+        spritePath = "";
+	}
+    public Message(){
+		messageId = 0;
+        title = "";
+        location = "";
+        content = "";
+        spritePath = "";
+	}
+
+    public override string ToString(){
+        return ("Id: " + messageId.ToString() + "\n" + "Title: " + title + "\n" + "Location: " + location + "\n" + "Content: " + content + "\n" + "SpritePath: " + spritePath);
+    }
+}
+
+// [System.Serializable]
+// public class Clue {
+// 	public int messageId;
+// 	public string title;
+// 	public string location;
+// 	public string content;
+// 	public string spritePath;
+// 	public Clue(int id){
+// 		messageId = id;
+//         title = "";
+//         location = "";
+//         content = "";
+//         spritePath = "";
+// 	}
+// }

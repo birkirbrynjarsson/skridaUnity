@@ -46,7 +46,7 @@ public class messageScript : MonoBehaviour {
 			playerScript.addXpValue (135);
 			this.foundMessage.opened = true;
 			scrollImage.GetComponent<Image> ().overrideSprite = openScroll;
-			clueScript.updateNotification (-1);
+			clueScript.updateNotification ();
 			playerScript.player.foundMessages.Find(x => x.messageId == message.messageId).opened = true;
 			playerScript.savePlayer();
 		}

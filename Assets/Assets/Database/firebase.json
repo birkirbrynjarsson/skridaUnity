@@ -1,0 +1,658 @@
+{
+    "messagesVersion": "1.0.0",
+	"messages": [
+		{
+			"messageId": 0,
+            "title": "Example Clue",
+            "location": "Exhibit",
+            "content": "Nothing here really, this is just an example clue.\n\nGood Luck!",
+            "spritePath": ""
+        },
+        {
+			"messageId": 1,
+            "title": "Velkomin í fjársjóðsleik",
+            "location": "Leiðbeiningar",
+            "content": "\"Fjársjóðir Skriðuklausturs\" er leikur þar sem markmiðið er að finna falda fjársjóði á Skriðuklaustri.\n\nFjársjóðirnir eru munir sem fundust við fornleifauppgröftinn á miðaldarklaustrinu hér á túninu fyrir neðan Gunnarsshús.\n\nEf þú heldur að þú ráðir við áskorunina og hyggst verða leiðtogi reglubræðra eða reglusystra í klaustrinu að Skriðu, þá þarftu að:\n\n- Finna allar vísbendingarnar\n- Finna alla fjársjóðina\n- Leysa allar þrautirnar\n\nGangi þér vel!",
+            "spritePath": ""
+        },
+        {
+			"messageId": 2,
+            "title": "Framvinda leiksins",
+            "location": "Leiðbeiningar",
+            "content": "Upp í vinstra horninu er hægt að fylgjast með framvinduna þína í leiknum.\n\nEf smellt er á myndina af leikmanninum opnast gluggi með ítarlegri upplýsingum, þar er svo hægt að velja sér nafn og velja útlit á leikmannin.",
+            "spritePath": "messages/playerProgress"
+        },
+        {
+			"messageId": 3,
+            "title": "Fjársjóðskistan",
+            "location": "Leiðbeiningar",
+            "content": "Í fjársjóðskistunni finnur þú alla þá fjársjóði sem þú hefur þegar safnað.\n\nÁ bakvið hvern fjársjóð eru þrautir sem uppfæra fjársjóðinn og gefur stjörnur ef þú leysir þær.",
+            "spritePath": "messages/chestBtn"
+        },
+        {
+			"messageId": 4,
+            "title": "Stækkunarglerið",
+            "location": "Leiðbeiningar",
+            "content": "Stækkunarglerið kveikir á myndavélinni í símanum þínum og gerir þér kleift að finna vísbendingar og fjársjóði á safninu með svokallaðri viðaukaveruleika- tækni (AR).\n\nTæknin auðkennir myndir (image recognition) til þess að staðsetja fjársjóðina í raunveruleikanum.\n\nPrófaðu sjálf/ur á púslinu sem er fyrir miðju sýningarsalsins í Gunnarshúsi á Skriðuklaustri.",
+            "spritePath": "messages/searchBtn"
+        },
+        {
+			"messageId": 5,
+            "title": "Innsiglaða perkamentið",
+            "location": "Leiðbeiningar",
+            "content": "Þetta er valmyndin sem þú ert í núna.\n\nHingað koma þær vísbendingar sem þú finnur við fjársjóðsleitina.",
+            "spritePath": "messages/mailBtn"
+        },
+        {
+			"messageId": 6,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 7,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 8,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 9,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 10,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 11,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 12,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 13,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 14,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 15,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 16,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 17,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 18,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 19,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 20,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 21,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 22,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 23,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 24,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 25,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 26,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 27,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 28,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 29,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 30,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 31,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 32,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 33,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 34,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        },
+        {
+			"messageId": 35,
+            "title": "",
+            "location": "",
+            "content": "",
+            "spritePath": ""
+        }
+    ],
+    "challengesVersion": "1.0.0",
+	"challenges": [
+		{
+			"question": "Hvaða ár var klausturskirkjan vígð?",
+			"answers": [
+				"1512"	
+			]
+		},
+		{
+			"question": "Hvað er grunnflötur klausturbygginganna stór?",
+			"answers": [
+				"yfir 1500 fermetrar",
+				"yfir 1500 m2",
+				"yfir 1500 m^2",
+				"yfir 1500",
+				"meira en 1500 fermetrar",
+				"meira en 1500 m2",
+				"meira en 1500 m^2",
+				"meira en 1500",
+                "stærra en 1500 fermetrar",
+				"stærra en 1500 m2",
+				"stærra en 1500 m^2",
+				"stærra en 1500",
+                "1500 fermetrar",
+				"1500", 
+                "1500 m2",
+                "1500 m^2",
+                "1500+ fermetrar",
+				"1500+", 
+                "1500+ m2",
+                "1500+ m^2",
+                "> 1500 fermetrar",
+				"> 1500", 
+                "> 1500 m2",
+                "> 1500 m^2"
+			]
+		},
+		{
+			"question": "Hver leigði klaustrið og allar eignir þess frá danska kónginum sem markaði formleg lok á klausturhaldi að Skriðu?",
+            "answers": [
+            	"sr. einar árnason",
+				"séra einar árnason",
+				"einar árnason",
+                "einar"
+			]
+        },
+        {
+            "question": "Hver eignaðist Skriðuklaustur og allar eignir þess við siðaskipti?",
+            "answers": [
+                "danski kóngurinn",
+                "danakonungur",
+                "dana kóngur",
+                "den danske kong",
+                "kóngurinn",
+                "kóngur",
+                "Kristján konungur",
+                "Kristján kóngur"
+			]
+        },
+		{
+			"question": "Hvaða ár var lútherstrú lögleidd í Danmörku?",
+            "answers": [
+            	"1537"
+            ]
+        },
+        {
+			"question": "Hvaða ár lauk klausturhaldi á Skriðu formlega?",
+            "answers": [
+            	"1552"
+            ]
+        },
+		{
+			"question": "Hvaða ár var minni kirkja byggð á rústum klausturkirkjunnar?",
+            "answers": [
+            	"1792"
+            ]
+        },
+        {
+			"question": "Hvað átti Skriðuklaustur margar jarðir við siðaskipti?",
+            "answers": [
+            	"44"
+            ],
+            "info": "Um 60 jarðir koma við sögu í kaupsamningum sem Skriðuklaustur á aðild að."
+		},
+		{
+			"question": "Hversu oft á sólarhring fór bænahald reglubræðra fram?",
+            "answers": [
+            	"8",
+                "átta",
+                "8 sinnum",
+                "átta sinnum",
+                "8 sinnum á sólahring",
+                "átta sinnum á sólahring"
+            ]
+		},
+		{
+			"question":"Hvað var bænasöngur reglubræðra kallaður?",
+            "answers": [
+            	"tíðir"
+            ]
+		},
+		{
+			"question": "Klukkan hvað var eyktartíð?",
+            "answers": [
+            	"15",
+				"15:00",
+				"klukkan 15",
+				"klukkan 15:00",
+				"kl 15",
+				"kl 15:00",
+
+				"3",
+                "3:00",
+				"klukkan 3",
+                "klukkan 3:00",
+				"kl 3",
+                "kl 3:00",
+				"3 eftir hádegi",
+                "3:00 eftir hádegi",
+				"klukkan 3 eftir hádegi",
+                "klukkan 3:00 eftir hádegi",
+				"kl 3 eftir hádegi",
+                "kl 3:00 eftir hádegi",
+                
+                "3 e.h.",
+                "3:00 e.h.",
+				"klukkan 3 e.h.",
+                "klukkan 3:00 e.h.",
+				"kl 3 e.h.",
+                "kl 3:00 e.h.",
+
+                "þrjú",
+				"klukkan þrjú",
+				"kl þrjú",
+				"þrjú eftir hádegi",
+				"klukkan þrjú eftir hádegi",
+				"kl þrjú eftir hádegi",
+
+				"þrjú e.h.",
+				"klukkan þrjú e.h.",
+				"kl þrjú e.h.",
+
+                "fimmtán",
+				"klukkan fimmtán",
+				"kl fimmtán",
+				"fimmtán eftir hádegi",
+				"klukkan fimmtán eftir hádegi",
+				"kl fimmtán eftir hádegi",
+                
+                "fimmtán e.h.",
+				"klukkan fimmtán e.h.",
+				"kl fimmtán e.h."
+			]
+		},
+		{
+			"question": "Á hvaða mánaðardegi er allra heilagra messa?",
+            "answers": [
+            	"1. nóvember",
+				"1. nóv",
+				"1 nóvember",
+				"1 nóv",
+				"fyrsti nóvember",
+				"fyrsti nóv",
+                "01/11",
+                "1/11",
+                "11/1",
+                "11/01",
+                "01.11",
+                "1.11",
+                "11.01",
+                "11.1"
+            ]
+		},
+		{
+			"question": "Hverskonar stofnun var rekin í klaustrinu á Skriðu?",
+            "answers": [
+				"hæli sjúkra",
+				"hæli",
+				"læknamiðstöð",
+            	"sjúkrahús",
+                "hjúkrun",
+                "hjúkrunarheimili",
+                "hospítal",
+                "lækna",
+                "lækningar",
+                "læknir",
+                "læknun",
+                "læknunar",
+                "sjúkra",
+                "spítali"
+            ]
+		},
+		{
+			"question": "Hvaða príor á Skriðuklaustri gegndi því hlutverki styst?",
+            "answers": [
+            	"jón markússon",
+                "jón"
+            ]
+		},
+		{
+			"question":"Hver gaf kirkjunni jörðina að Skriðu?",
+            "answers": [
+            	"sesselja þorsteinsdóttir",
+				"sesselja þorsteins",
+				"sesselja þorsteinsd",
+                "sesselja þorsteinsd.",
+                "sesselja"
+            ]
+		},
+		{
+			"question":"Hvaða ár er talið að klaustrið á Skriðu hafi verið stofnað?",
+            "answers": [
+            	"1493"
+            ]
+		},
+		{
+			"question": "Hvaða synd hafði Sesselja drýgt?",
+            "answers": [
+            	"kvæntist frænda sínum",
+				"giftist frænda sínum",
+                "gifst frænda sínum",
+                "kvæntist skyldmenni",
+                "giftist skyldmenni",
+                "gifst skyldmenni",
+                "kvæntist frænda",
+                "giftist frænda",
+                "gifst frænda",
+                "gekk í hjónaband með frænda",
+                "gekk í hjónaband með frænda sínum",
+                "gekk í hjónaband með skyldmenni",
+                "gekk í hjónaband",
+                "gifst",
+                "giftist",
+                "kvæntist",
+                "skyldleiki",
+                "skyldleiki hjóna",
+                "giftist einari ormssyni loftssyni hins ríka",
+                "giftist einari",
+                "giftist einari ormssyni",
+                "giftist einari ormssyni loftssyni",
+                "giftist einari frænda",
+                "kvæntist einari ormssyni loftssyni hins ríka",
+                "kvæntist einari",
+                "kvæntist einari ormssyni",
+                "kvæntist einari ormssyni loftssyni",
+                "kvæntist einari frænda",
+                "giftist fjórmenningi",
+                "kvæntist fjórmenningi",
+                "ósiðlegt hjónaband",
+                
+                "hún kvæntist frænda sínum",
+				"hún giftist frænda sínum",
+                "hún kvæntist skyldmenni",
+                "hún giftist skyldmenni",
+                "hún kvæntist frænda",
+                "hún giftist frænda",
+                "hún gekk í hjónaband með frænda",
+                "hún gekk í hjónaband með frænda sínum",
+                "hún gekk í hjónaband með skyldmenni",
+                "hún gekk í hjónaband",
+                "hún giftist",
+                "hún kvæntist",
+                "hún giftist einari ormssyni loftssyni hins ríka",
+                "hún giftist einari",
+                "hún giftist einari ormssyni",
+                "hún giftist einari ormssyni loftssyni",
+                "hún giftist einari frænda",
+                "hún kvæntist einari ormssyni loftssyni hins ríka",
+                "hún kvæntist einari",
+                "hún kvæntist einari ormssyni",
+                "hún kvæntist einari ormssyni loftssyni",
+                "hún kvæntist einari frænda",
+                "hún giftist fjórmenningi",
+                "hún kvæntist fjórmenningi",
+                "hún stofnaði til ósiðlegs hjónabands",
+
+                "sifjaspell",
+                "hún framdi sifjaspell",
+                "blóðskömm",
+                "hún framdi blóðskömm",
+                "frændsemisspell",
+                "hún framdi frændsemisspell",
+                "blóðskylda",
+                "samræði skyldmenna"
+            ],
+            "info": "Sesselja gifist frænda sínum Einari Ormssyni en þau voru fjórmenningar og í þá daga bannaði kirkjan hjónabönd fjórmenninga."
+		},
+		{
+			"question": "Af hverju gaf Sesselja jörðina Skriðu til stofnunar klausturs?",
+            "answers": [
+            	"til friðþægingar gagnvart guði",
+				"friðþægingar gagnvart guði",
+                "friðþægingar",
+				"friðþæging gagnvart guði",
+				"friðþæging",
+				"til friðþægingar",
+                "friðþægingu gagnvart guði",
+                "friðþægingu",
+                "syndaaflausn",
+                "syndaaflausnar",
+                "til syndaaflausnar"
+            ]
+		},
+		{
+			"question": "Hvaða ár er gjafabréf þeirra Hallsteins og Sesselju dagsett?",
+            "answers": [
+				"8 júní 1500",
+				"8 júní árið 1500",
+				"8 júní, 1500",
+				"8. júní árið 1500",
+				"8. júní, 1500",
+				"áttunda júní 1500",
+				"áttunda júní árið 1500",
+            	"8. júní 1500",
+                "06/08",
+                "06/08/1500",
+                "06/8",
+                "06/8/1500",
+                "08/06",
+                "08/06/1500",
+                "08/6",
+                "08/6/1500",
+                "1500",
+                "6/08",
+                "6/08/1500",
+                "6/8",
+                "6/8/1500",
+                "8 júní",
+                "8/06",
+                "8/06/1500",
+                "8/6",
+                "8/6/1500",
+                "árið 1500"
+            ]
+		},
+		{
+			"question": "Hver var Skálholtsbiskup þegar Skriðuklaustur var stofnað?",
+            "answers": [
+            	"stefán jónsson",
+                "stefán"
+            ]
+		},
+		{
+			"question":"Hvað hét fyrsti príor Skriðuklausturs?",
+            "answers": [
+            	"narfi jónsson",
+                "narfi"
+            ]
+		},
+		{
+			"question": "Eftir hvaða klausturreglu starfaði Skriðuklaustur?",
+            "answers": [
+            	"ágústínusarreglu",
+				"ágústínusarregla",
+                "reglu ágústínusar",
+                "augustinus",
+                "augustinusarreglu",
+                "augustinusarregla",
+                "regla augustinusar",
+                "regla augustinus",
+                "augustinusar",
+                "ágústínusar",
+                "ágústínus"
+            ]
+		},
+		{
+			"question": "Hvað kallast yfirmaður Ágústínusarklaustra?",
+            "answers": [
+            	"príor"
+            ]
+		},
+		{
+			"question":"Hvaða ár var fyrsta klaustrið af reglu Ágústínusar stofnað á Íslandi?",
+            "answers": [
+            	"1168"
+            ]
+		},
+		{
+			"question":"Hvaða klaustur var stofnað síðast þeirra klaustra sem störfuðu á Íslandi á kaþólskum tíma?",
+            "answers": [
+            	"skriðuklaustur",
+                "skriðu",
+                "að skriðu",
+                "klaustrið að skriðu",
+                "skriða"
+            ]
+		},
+		{
+			"question":"Hvað voru margir einstaklingar grafnir upp í klausturkirkjugarðinum?",
+            "answers": [
+            	"295",
+                "tvöhundruðníutíuogfimm"
+            ]
+		},
+		{
+			"question": "Botnaðu ljóðið:\n\nKalt er við kórbak,\nkúrir þar Jón Hrak.\nÝtar snúa austur og vestur\n...",
+            "answers": [
+            	"allir nema jón hrak"
+            ]
+		}
+	]
+}

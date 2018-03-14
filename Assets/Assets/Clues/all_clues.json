@@ -1,0 +1,45 @@
+{
+    "cluesVersion": "1.0.0",
+	"clues": [
+		{
+			"messageId": 0,
+            "title": "Example Clue",
+            "location": "Exhibit",
+            "content": "Nothing here really, this is just an example clue.\n\nGood Luck!"
+        },
+        {
+			"messageId": 1,
+            "title": "Velkomin í fjársjóðsleik",
+            "location": "Leiðbeiningar",
+            "content": "\"Fjársjóðir Skriðuklausturs\" er leikur þar sem markmiðið er að finna falda fjársjóði á Skriðuklaustri.\n\nFjársjóðirnir eru munir sem fundust við fornleifauppgröftinn á miðaldarklaustrinu hér á túninu fyrir neðan Gunnarsshús.\n\nEf þú heldur að þú ráðir við áskorunina og hyggst verða leiðtogi reglubræðra eða reglusystra í klaustrinu að Skriðu, þá þarftu að:\n\n- Finna allar vísbendingarnar\n- Finna alla fjársjóðina\n- Leysa allar þrautirnar\n\nGangi þér vel!"
+        },
+        {
+			"messageId": 2,
+            "title": "Framvinda leiksins",
+            "location": "Leiðbeiningar",
+            "content": "Upp í vinstra horninu er hægt að fylgjast með framvinduna þína í leiknum.\n\nEf smellt er á myndina af leikmanninum opnast gluggi með ítarlegri upplýsingum, þar er svo hægt að velja sér nafn og velja útlit á leikmannin.",
+            "spritePath": "playerProgress"
+        },
+        {
+			"messageId": 3,
+            "title": "Fjársjóðskistan",
+            "location": "Leiðbeiningar",
+            "content": "Í fjársjóðskistunni finnur þú alla þá fjársjóði sem þú hefur þegar safnað.\n\nÁ bakvið hvern fjársjóð eru þrautir sem uppfæra fjársjóðinn og gefur stjörnur ef þú leysir þær.",
+            "spritePath": "chestBtn"
+        },
+        {
+			"messageId": 4,
+            "title": "Stækkunarglerið",
+            "location": "Leiðbeiningar",
+            "content": "Stækkunarglerið kveikir á myndavélinni í símanum þínum og gerir þér kleift að finna vísbendingar og fjársjóði á safninu með svokallaðri viðaukaveruleika- tækni (AR).\n\nTæknin auðkennir myndir (image recognition) til þess að staðsetja fjársjóðina í raunveruleikanum.\n\nPrófaðu sjálf/ur á púslinu sem er fyrir miðju sýningarsalsins í Gunnarshúsi á Skriðuklaustri.",
+            "spritePath": "searchBtn"
+        },
+        {
+			"messageId": 5,
+            "title": "Innsiglaða perkamentið",
+            "location": "Leiðbeiningar",
+            "content": "Þetta er valmyndin sem þú ert í núna.\n\nHingað koma þær vísbendingar sem þú finnur við fjársjóðsleitina.",
+            "spritePath": "mailBtn"
+        }
+    ]
+}

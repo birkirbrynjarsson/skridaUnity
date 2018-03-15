@@ -71,8 +71,7 @@ public class ClueControllerScript : MonoBehaviour {
 				updateNotification();
 			}
 		}
-		totalCluesFound = playerController.player.foundMessages.Count;
-		totalCluesText.text = totalCluesFound.ToString () + " / " + database.localMessages.Count.ToString ();
+		updateTotal();
 		sortMessages();
 	}
 	
@@ -127,7 +126,7 @@ public class ClueControllerScript : MonoBehaviour {
 
 	public void updateTotal(){
 		totalCluesFound = playerController.player.foundMessages.Count;
-		totalCluesText.text = totalCluesFound.ToString () + " / " + database.localMessages.Count.ToString ();
+		totalCluesText.text = totalCluesFound.ToString () + " / " + (database.localMessages.Count - 1).ToString ();
 	}
 
 	void sortMessages(){

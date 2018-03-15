@@ -85,10 +85,6 @@ namespace Skrida.Database {
 			} else {
 				file = File.Create(messagesDest);
 			}
-			foreach(Message message in this.localMessages){
-				Debug.Log("Saving message: " + message.title);
-			}
-			Debug.Log("Saving Messages, size of localMessages: " + this.localMessages.Count + " isNull: " + (this.localMessages == null));
 			bf.Serialize(file, this.localMessages);
 			file.Close();
 		}
@@ -154,7 +150,6 @@ namespace Skrida.Database {
 							for(int i = 0; i < snapshot.ChildrenCount; i++){
 								Message m = new Message();
 								Int32.TryParse(snapshot.Child(i.ToString()).Child("messageId").Value.ToString(), out m.messageId);
-								Debug.Log(snapshot.Child(i.ToString()).Child("title").Value.ToString());
 								m.title = snapshot.Child(i.ToString()).Child("title").Value.ToString();
 								m.content = snapshot.Child(i.ToString()).Child("content").Value.ToString();
 								m.location = snapshot.Child(i.ToString()).Child("location").Value.ToString();
@@ -169,8 +164,6 @@ namespace Skrida.Database {
 					if(!fetchedRemoteMessages){
 						Debug.Log("Yielding WaitForSeconds() from LoadRemoteMessages");
 						yield return new WaitForSeconds(15f);
-					} else {
-						Debug.Log("fetchedRemoteMessages == true");
 					}
 				}
 			} else {

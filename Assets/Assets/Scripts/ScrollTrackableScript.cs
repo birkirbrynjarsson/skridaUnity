@@ -148,6 +148,7 @@ namespace Vuforia
             string jmoEffects = "CFX Prefabs (Mobile)/";
             GameObject effectObject = (GameObject)Resources.Load(jmoEffects + "Misc/CFXM_CircularLightWall");
             GameObject effect = Instantiate(effectObject);
+            effect.transform.parent = gameObject.transform;
             effect.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             spawnedEffects.Add(effect);
         }

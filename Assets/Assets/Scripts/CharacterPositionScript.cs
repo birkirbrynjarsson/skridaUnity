@@ -18,7 +18,7 @@ public class CharacterPositionScript : MonoBehaviour {
 			transform.localScale = new Vector3 (1f, 1f, 1f);
 		} else {
 			transform.SetParent (hudParent);
-			transform.localPosition = new Vector3 (40, -10f, 0f);
+			transform.localPosition = new Vector3 (48, -10f, 0f);
 			transform.localScale = new Vector3 (0.3f, 0.3f, 0.3f);
 		}
 		if (fsm.ActiveStateName == "MainMenu") {

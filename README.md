@@ -43,11 +43,7 @@ At runtime, the game:
 
 ## Demo Video
 
-<video controls preload="metadata" width="100%">
-  <source src="https://birkir.is/cv/img/klaustur-demo.mp4" type="video/mp4">
-  Your browser does not support the video tag. You can download the demo here:
-  <a href="https://birkir.is/cv/img/klaustur-demo.mp4">klaustur-demo.mp4</a>.
-</video>
+https://github.com/user-attachments/assets/919cf955-fc39-4cb3-afcc-1b2d3b6e6278
 
 ## Core Gameplay Loop
 
